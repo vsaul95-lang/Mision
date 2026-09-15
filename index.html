@@ -2,430 +2,914 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Misión Planeta - Guardianes de la Tierra</title>
 
     <link rel="stylesheet" href="estilo.css">
-
 </head>
 
 <body>
 
 
-<!-- ============================= -->
-<!-- PANTALLA DE INICIO -->
-<!-- ============================= -->
+    <!-- ==========================================
+         INICIO
+    =========================================== -->
 
-<div id="inicio" class="pantalla">
+    <section id="inicio" class="pantalla">
 
-    <div class="planeta">
-        🌎
-    </div>
+        <div class="icono">🌎</div>
 
-    <h1>
-        MISIÓN PLANETA
-    </h1>
+        <h1>Misión Planeta</h1>
 
-    <h2>
-        Guardianes de la Tierra
-    </h2>
+        <h2>Guardianes de la Tierra</h2>
 
-    <p>
-        La Tierra necesita nuevos guardianes.
-    </p>
+        <p>
+            Bienvenido a esta aventura. Completa las misiones,
+            aprende sobre el cuidado del planeta y consigue puntos
+            para convertirte en un Guardián de la Tierra.
+        </p>
 
-    <p>
-        Completa las misiones, supera los retos
-        y demuestra cuánto sabes sobre el cuidado
-        de nuestro planeta.
-    </p>
+        <p>
+            <strong>Proyecto educativo desarrollado por:</strong><br>
+            Oscar Saúl Velásquez Montúfar
+        </p>
 
-    <button onclick="mostrarMision1()">
-        🚀 COMENZAR MISIÓN
-    </button>
+        <p>
+            PEM en Tecnología Educativa<br>
+            Universidad Mariano Gálvez de Guatemala<br>
+            2026
+        </p>
 
-</div>
-
-
-<!-- ============================= -->
-<!-- MISIÓN 1 -->
-<!-- ============================= -->
-
-<div id="mision1" class="pantalla" style="display:none;">
-
-    <div class="icono">
-        ♻️
-    </div>
-
-    <h1>
-        MISIÓN 1
-    </h1>
-
-    <h2>
-        Guardianes de los residuos
-    </h2>
-
-    <p>
-        Tu primera misión es aprender a reconocer
-        las acciones que ayudan a reducir y manejar
-        correctamente los residuos.
-    </p>
-
-    <button onclick="iniciarMision1()">
-        ▶ INICIAR RETOS
-    </button>
-
-</div>
-
-
-<!-- ============================= -->
-<!-- RETO 1 -->
-<!-- ============================= -->
-
-<div id="reto1" class="pantalla" style="display:none;">
-
-    <div class="icono">
-        ♻️
-    </div>
-
-    <div class="contador">
-        RETO 1 DE 5
-    </div>
-
-    <h1>
-        Guardianes de los residuos
-    </h1>
-
-    <div class="puntos">
-        ⭐ Puntos:
-        <span id="puntos">0</span> / 10
-    </div>
-
-    <p class="pregunta">
-        ¿Cuál de estas acciones ayuda a cuidar
-        el medio ambiente?
-    </p>
-
-    <div class="opciones">
-
-        <button class="opcion"
-                onclick="responderReto(0)">
-            🗑️ Tirar basura al suelo
+        <button onclick="mostrarMision1()">
+            🚀 Comenzar misión
         </button>
 
-        <button class="opcion"
-                onclick="responderReto(1)">
-            ♻️ Separar correctamente los residuos
+    </section>
+
+
+    <!-- ==========================================
+         MISIÓN 1
+    =========================================== -->
+
+    <section id="mision1" class="pantalla oculto">
+
+        <div class="icono">♻️</div>
+
+        <h1>Misión 1</h1>
+
+        <h2>Guardianes de los residuos</h2>
+
+        <p>
+            En esta misión aprenderás cómo manejar correctamente
+            los residuos y ayudar a mantener limpio nuestro planeta.
+        </p>
+
+        <p>
+            Responde correctamente los retos para conseguir
+            <strong>10 puntos</strong>.
+        </p>
+
+        <button onclick="iniciarMision1()">
+            ▶️ Iniciar Misión 1
         </button>
 
-        <button class="opcion"
-                onclick="responderReto(0)">
-            🚮 Dejar basura en cualquier lugar
+    </section>
+
+
+    <!-- ==========================================
+         RETOS MISIÓN 1
+    =========================================== -->
+
+    <section id="reto1" class="pantalla oculto">
+
+        <h2>♻️ Reto 1</h2>
+
+        <p>
+            ¿Qué debemos hacer con una botella de plástico
+            cuando ya no la necesitamos?
+        </p>
+
+        <button class="opcion" onclick="responderReto1(1)">
+            Tirarla al suelo
         </button>
 
-    </div>
-
-    <div id="mensaje" class="mensaje"></div>
-
-    <button id="siguiente"
-            style="display:none;"
-            onclick="mostrarReto2()">
-
-        ▶ SIGUIENTE RETO
-
-    </button>
-
-</div>
-
-
-<!-- ============================= -->
-<!-- RETO 2 -->
-<!-- ============================= -->
-
-<div id="reto2" class="pantalla" style="display:none;">
-
-    <div class="icono">
-        ♻️
-    </div>
-
-    <div class="contador">
-        RETO 2 DE 5
-    </div>
-
-    <h1>
-        Reducir los residuos
-    </h1>
-
-    <div class="puntos">
-        ⭐ Puntos:
-        <span id="puntos2">0</span> / 10
-    </div>
-
-    <p class="pregunta">
-        ¿Cuál acción ayuda a producir menos residuos?
-    </p>
-
-    <div class="opciones">
-
-        <button class="opcion"
-                onclick="responderReto2(1)">
-            🛍️ Utilizar una bolsa reutilizable
+        <button class="opcion" onclick="responderReto1(2)">
+            Colocarla en el lugar adecuado para reciclarla
         </button>
 
-        <button class="opcion"
-                onclick="responderReto2(0)">
-            🛍️ Usar muchas bolsas desechables
+        <button class="opcion" onclick="responderReto1(3)">
+            Dejarla en cualquier lugar
         </button>
 
-        <button class="opcion"
-                onclick="responderReto2(0)">
-            🗑️ Comprar productos innecesarios
+        <div id="mensaje1" class="mensaje"></div>
+
+        <button id="siguiente1" class="oculto" onclick="mostrarReto2()">
+            ➡️ Siguiente reto
         </button>
 
-    </div>
-
-    <div id="mensaje2" class="mensaje"></div>
-
-    <button id="siguiente2"
-            style="display:none;"
-            onclick="mostrarReto3()">
-
-        ▶ SIGUIENTE RETO
-
-    </button>
-
-</div>
+    </section>
 
 
-<!-- ============================= -->
-<!-- RETO 3 -->
-<!-- ============================= -->
+    <section id="reto2" class="pantalla oculto">
 
-<div id="reto3" class="pantalla" style="display:none;">
+        <h2>♻️ Reto 2</h2>
 
-    <div class="icono">
-        ♻️
-    </div>
+        <p>
+            ¿Cuál de estos residuos puede reciclarse?
+        </p>
 
-    <div class="contador">
-        RETO 3 DE 5
-    </div>
-
-    <h1>
-        Mantener limpio
-    </h1>
-
-    <div class="puntos">
-        ⭐ Puntos:
-        <span id="puntos3">0</span> / 10
-    </div>
-
-    <p class="pregunta">
-        ¿Dónde debemos colocar los residuos?
-    </p>
-
-    <div class="opciones">
-
-        <button class="opcion"
-                onclick="responderReto3(0)">
-            🌳 En el suelo
+        <button class="opcion" onclick="responderReto2(1)">
+            Una botella de plástico
         </button>
 
-        <button class="opcion"
-                onclick="responderReto3(0)">
-            💧 En los ríos
+        <button class="opcion" onclick="responderReto2(2)">
+            Restos de comida
         </button>
 
-        <button class="opcion"
-                onclick="responderReto3(1)">
-            🗑️ En recipientes adecuados
+        <button class="opcion" onclick="responderReto2(3)">
+            Una cáscara de fruta
         </button>
 
-    </div>
+        <div id="mensaje2" class="mensaje"></div>
 
-    <div id="mensaje3" class="mensaje"></div>
-
-    <button id="siguiente3"
-            style="display:none;"
-            onclick="mostrarReto4()">
-
-        ▶ SIGUIENTE RETO
-
-    </button>
-
-</div>
-
-
-<!-- ============================= -->
-<!-- RETO 4 -->
-<!-- ============================= -->
-
-<div id="reto4" class="pantalla" style="display:none;">
-
-    <div class="icono">
-        ♻️
-    </div>
-
-    <div class="contador">
-        RETO 4 DE 5
-    </div>
-
-    <h1>
-        Reciclar
-    </h1>
-
-    <div class="puntos">
-        ⭐ Puntos:
-        <span id="puntos4">0</span> / 10
-    </div>
-
-    <p class="pregunta">
-        ¿Qué podemos hacer con algunos materiales
-        antes de desecharlos?
-    </p>
-
-    <div class="opciones">
-
-        <button class="opcion"
-                onclick="responderReto4(1)">
-            ♻️ Reutilizarlos o reciclarlos
+        <button id="siguiente2" class="oculto" onclick="mostrarReto3()">
+            ➡️ Siguiente reto
         </button>
 
-        <button class="opcion"
-                onclick="responderReto4(0)">
-            🔥 Quemarlos siempre
+    </section>
+
+
+    <section id="reto3" class="pantalla oculto">
+
+        <h2>♻️ Reto 3</h2>
+
+        <p>
+            ¿Por qué es importante reducir la cantidad de basura?
+        </p>
+
+        <button class="opcion" onclick="responderReto3(1)">
+            Para cuidar el ambiente
         </button>
 
-        <button class="opcion"
-                onclick="responderReto4(0)">
-            🌊 Lanzarlos al río
+        <button class="opcion" onclick="responderReto3(2)">
+            Para producir más basura
         </button>
 
-    </div>
-
-    <div id="mensaje4" class="mensaje"></div>
-
-    <button id="siguiente4"
-            style="display:none;"
-            onclick="mostrarReto5()">
-
-        ▶ SIGUIENTE RETO
-
-    </button>
-
-</div>
-
-
-<!-- ============================= -->
-<!-- RETO 5 -->
-<!-- ============================= -->
-
-<div id="reto5" class="pantalla" style="display:none;">
-
-    <div class="icono">
-        🌎
-    </div>
-
-    <div class="contador">
-        RETO 5 DE 5
-    </div>
-
-    <h1>
-        Último reto
-    </h1>
-
-    <div class="puntos">
-        ⭐ Puntos:
-        <span id="puntos5">0</span> / 10
-    </div>
-
-    <p class="pregunta">
-        ¿Cuál de estas acciones ayuda más
-        a cuidar nuestro planeta?
-    </p>
-
-    <div class="opciones">
-
-        <button class="opcion"
-                onclick="responderReto5(1)">
-            🌎 Reducir, reutilizar y reciclar
+        <button class="opcion" onclick="responderReto3(3)">
+            Porque la basura no afecta al planeta
         </button>
 
-        <button class="opcion"
-                onclick="responderReto5(0)">
-            🗑️ Tirar basura en cualquier lugar
+        <div id="mensaje3" class="mensaje"></div>
+
+        <button id="siguiente3" class="oculto" onclick="mostrarReto4()">
+            ➡️ Siguiente reto
         </button>
 
-        <button class="opcion"
-                onclick="responderReto5(0)">
-            🔥 Quemar todos los residuos
+    </section>
+
+
+    <section id="reto4" class="pantalla oculto">
+
+        <h2>♻️ Reto 4</h2>
+
+        <p>
+            ¿Qué acción ayuda a producir menos residuos?
+        </p>
+
+        <button class="opcion" onclick="responderReto4(1)">
+            Utilizar productos reutilizables
         </button>
 
-    </div>
+        <button class="opcion" onclick="responderReto4(2)">
+            Usar productos desechables siempre
+        </button>
 
-    <div id="mensaje5" class="mensaje"></div>
+        <button class="opcion" onclick="responderReto4(3)">
+            Tirar los objetos que todavía sirven
+        </button>
 
-    <button id="finalizarMision"
-            style="display:none;"
-            onclick="finalizarMision1()">
+        <div id="mensaje4" class="mensaje"></div>
 
-        🏆 FINALIZAR MISIÓN
+        <button id="siguiente4" class="oculto" onclick="mostrarReto5()">
+            ➡️ Siguiente reto
+        </button>
 
-    </button>
-
-</div>
-
-
-<!-- ============================= -->
-<!-- RESULTADO -->
-<!-- ============================= -->
-
-<div id="resultado1" class="pantalla" style="display:none;">
-
-    <div class="icono">
-        🏆
-    </div>
-
-    <h1>
-        ¡MISIÓN COMPLETADA!
-    </h1>
-
-    <h2>
-        Guardianes de los residuos
-    </h2>
-
-    <p>
-        Has terminado todos los retos de esta misión.
-    </p>
-
-    <div class="resultado-puntos">
-
-        ⭐ Tu puntuación:
-
-        <strong>
-            <span id="resultadoPuntos">0</span> / 10
-        </strong>
-
-    </div>
-
-    <p>
-        ¡Buen trabajo, Guardián de la Tierra!
-    </p>
-
-    <button onclick="alert('Aquí construiremos la Misión 2')">
-
-        💧 CONTINUAR A MISIÓN 2
-
-    </button>
-
-</div>
+    </section>
 
 
-<script src="juego.js"></script>
+    <section id="reto5" class="pantalla oculto">
+
+        <h2>♻️ Reto 5</h2>
+
+        <p>
+            ¿Qué podemos hacer con algunos objetos antes de tirarlos?
+        </p>
+
+        <button class="opcion" onclick="responderReto5(1)">
+            Reutilizarlos
+        </button>
+
+        <button class="opcion" onclick="responderReto5(2)">
+            Tirarlos inmediatamente
+        </button>
+
+        <button class="opcion" onclick="responderReto5(3)">
+            Dejarlos abandonados
+        </button>
+
+        <div id="mensaje5" class="mensaje"></div>
+
+        <button id="finalizar1" class="oculto" onclick="finalizarMision1()">
+            🏆 Finalizar Misión 1
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RESULTADO MISIÓN 1
+    =========================================== -->
+
+    <section id="resultado1" class="pantalla oculto">
+
+        <div class="icono">🎉</div>
+
+        <h1>¡Misión 1 completada!</h1>
+
+        <p>
+            Has completado la misión Guardianes de los residuos.
+        </p>
+
+        <h2 id="puntosResultado1"></h2>
+
+        <p>
+            ¡Buen trabajo! Ahora estás listo para continuar
+            con la siguiente misión.
+        </p>
+
+        <button onclick="mostrarMision2()">
+            💧 Ir a Misión 2
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         MISIÓN 2
+    =========================================== -->
+
+    <section id="mision2" class="pantalla oculto">
+
+        <div class="icono">💧</div>
+
+        <h1>Misión 2</h1>
+
+        <h2>Guardianes del agua</h2>
+
+        <p>
+            El agua es un recurso indispensable para la vida.
+            En esta misión aprenderás algunas formas de cuidarla
+            y evitar desperdiciarla.
+        </p>
+
+        <p>
+            Completa los cinco retos y consigue
+            <strong>10 puntos</strong>.
+        </p>
+
+        <button onclick="iniciarMision2()">
+            ▶️ Iniciar Misión 2
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RETOS MISIÓN 2
+    =========================================== -->
+
+    <section id="retoM2_1" class="pantalla oculto">
+
+        <h2>💧 Reto 1</h2>
+
+        <p>
+            ¿Qué debemos hacer mientras nos cepillamos los dientes
+            para ahorrar agua?
+        </p>
+
+        <button class="opcion" onclick="responderM2Reto1(1)">
+            Dejar el grifo abierto
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto1(2)">
+            Cerrar el grifo mientras nos cepillamos
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto1(3)">
+            Abrir más el grifo
+        </button>
+
+        <div id="mensajeM2_1" class="mensaje"></div>
+
+        <button id="siguienteM2_1" class="oculto" onclick="mostrarM2Reto2()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM2_2" class="pantalla oculto">
+
+        <h2>💧 Reto 2</h2>
+
+        <p>
+            Si encontramos una llave de agua abierta sin necesidad,
+            ¿qué debemos hacer?
+        </p>
+
+        <button class="opcion" onclick="responderM2Reto2(1)">
+            Ignorarla
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto2(2)">
+            Abrirla más
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto2(3)">
+            Cerrarla
+        </button>
+
+        <div id="mensajeM2_2" class="mensaje"></div>
+
+        <button id="siguienteM2_2" class="oculto" onclick="mostrarM2Reto3()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM2_3" class="pantalla oculto">
+
+        <h2>💧 Reto 3</h2>
+
+        <p>
+            ¿Cuál de estas acciones ayuda a ahorrar agua?
+        </p>
+
+        <button class="opcion" onclick="responderM2Reto3(1)">
+            Reparar las fugas de agua
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto3(2)">
+            Dejar las tuberías con fugas
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto3(3)">
+            Jugar con el agua sin necesidad
+        </button>
+
+        <div id="mensajeM2_3" class="mensaje"></div>
+
+        <button id="siguienteM2_3" class="oculto" onclick="mostrarM2Reto4()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM2_4" class="pantalla oculto">
+
+        <h2>💧 Reto 4</h2>
+
+        <p>
+            ¿Por qué debemos cuidar el agua?
+        </p>
+
+        <button class="opcion" onclick="responderM2Reto4(1)">
+            Porque es necesaria para la vida
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto4(2)">
+            Porque podemos producir agua fácilmente
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto4(3)">
+            Porque nunca se termina
+        </button>
+
+        <div id="mensajeM2_4" class="mensaje"></div>
+
+        <button id="siguienteM2_4" class="oculto" onclick="mostrarM2Reto5()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM2_5" class="pantalla oculto">
+
+        <h2>💧 Reto 5</h2>
+
+        <p>
+            ¿Cuál es una buena práctica para utilizar el agua
+            durante las actividades de limpieza?
+        </p>
+
+        <button class="opcion" onclick="responderM2Reto5(1)">
+            Usar solamente el agua necesaria
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto5(2)">
+            Dejar correr el agua todo el tiempo
+        </button>
+
+        <button class="opcion" onclick="responderM2Reto5(3)">
+            Desperdiciar agua
+        </button>
+
+        <div id="mensajeM2_5" class="mensaje"></div>
+
+        <button id="finalizarM2" class="oculto" onclick="finalizarMision2()">
+            🏆 Finalizar Misión 2
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RESULTADO MISIÓN 2
+    =========================================== -->
+
+    <section id="resultado2" class="pantalla oculto">
+
+        <div class="icono">💦</div>
+
+        <h1>¡Misión 2 completada!</h1>
+
+        <p>
+            Has completado la misión Guardianes del agua.
+        </p>
+
+        <h2 id="puntosResultado2"></h2>
+
+        <p>
+            Has demostrado que conoces algunas formas de cuidar
+            este importante recurso.
+        </p>
+
+        <button onclick="mostrarMision3()">
+            ⚡ Ir a Misión 3
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         MISIÓN 3
+    =========================================== -->
+
+    <section id="mision3" class="pantalla oculto">
+
+        <div class="icono">⚡</div>
+
+        <h1>Misión 3</h1>
+
+        <h2>Guardianes de la energía</h2>
+
+        <p>
+            La energía es importante para muchas actividades
+            de nuestra vida diaria. En esta misión aprenderás
+            cómo utilizarla de manera responsable.
+        </p>
+
+        <p>
+            Completa los cinco retos y consigue
+            <strong>10 puntos</strong>.
+        </p>
+
+        <button onclick="iniciarMision3()">
+            ▶️ Iniciar Misión 3
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RETOS MISIÓN 3
+    =========================================== -->
+
+    <section id="retoM3_1" class="pantalla oculto">
+
+        <h2>⚡ Reto 1</h2>
+
+        <p>
+            ¿Qué debemos hacer cuando salimos de una habitación
+            y no necesitamos la luz?
+        </p>
+
+        <button class="opcion" onclick="responderM3Reto1(1)">
+            Dejar la luz encendida
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto1(2)">
+            Apagar la luz
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto1(3)">
+            Encender otra luz
+        </button>
+
+        <div id="mensajeM3_1" class="mensaje"></div>
+
+        <button id="siguienteM3_1" class="oculto" onclick="mostrarM3Reto2()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM3_2" class="pantalla oculto">
+
+        <h2>⚡ Reto 2</h2>
+
+        <p>
+            ¿Cuál de estas acciones ayuda a ahorrar electricidad?
+        </p>
+
+        <button class="opcion" onclick="responderM3Reto2(1)">
+            Dejar los aparatos encendidos sin utilizarlos
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto2(2)">
+            Apagar los aparatos cuando no los necesitamos
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto2(3)">
+            Encender todos los aparatos al mismo tiempo
+        </button>
+
+        <div id="mensajeM3_2" class="mensaje"></div>
+
+        <button id="siguienteM3_2" class="oculto" onclick="mostrarM3Reto3()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM3_3" class="pantalla oculto">
+
+        <h2>⚡ Reto 3</h2>
+
+        <p>
+            Durante el día, ¿qué podemos aprovechar para iluminar
+            una habitación?
+        </p>
+
+        <button class="opcion" onclick="responderM3Reto3(1)">
+            La luz natural del sol
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto3(2)">
+            Todas las luces artificiales
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto3(3)">
+            Ninguna fuente de luz
+        </button>
+
+        <div id="mensajeM3_3" class="mensaje"></div>
+
+        <button id="siguienteM3_3" class="oculto" onclick="mostrarM3Reto4()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM3_4" class="pantalla oculto">
+
+        <h2>⚡ Reto 4</h2>
+
+        <p>
+            ¿Qué debemos hacer con un cargador cuando ya no
+            estamos cargando un dispositivo?
+        </p>
+
+        <button class="opcion" onclick="responderM3Reto4(1)">
+            Dejarlo conectado siempre
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto4(2)">
+            Conectar más cargadores
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto4(3)">
+            Desconectarlo cuando ya no se necesita
+        </button>
+
+        <div id="mensajeM3_4" class="mensaje"></div>
+
+        <button id="siguienteM3_4" class="oculto" onclick="mostrarM3Reto5()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <section id="retoM3_5" class="pantalla oculto">
+
+        <h2>⚡ Reto 5</h2>
+
+        <p>
+            ¿Cuál es una buena forma de utilizar responsablemente
+            la energía en casa o en la escuela?
+        </p>
+
+        <button class="opcion" onclick="responderM3Reto5(1)">
+            Utilizar solamente la energía necesaria
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto5(2)">
+            Mantener todos los aparatos encendidos
+        </button>
+
+        <button class="opcion" onclick="responderM3Reto5(3)">
+            Encender las luces aunque haya suficiente luz natural
+        </button>
+
+        <div id="mensajeM3_5" class="mensaje"></div>
+
+        <button id="finalizarM3" class="oculto" onclick="finalizarMision3()">
+            🏆 Finalizar Misión 3
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RESULTADO MISIÓN 3
+    =========================================== -->
+
+    <section id="resultado3" class="pantalla oculto">
+
+        <div class="icono">🌟</div>
+
+        <h1>¡Misión 3 completada!</h1>
+
+        <p>
+            Has completado la misión Guardianes de la energía.
+        </p>
+
+        <h2 id="puntosResultado3"></h2>
+
+        <p>
+            ¡Excelente trabajo! Cada acción responsable
+            ayuda a cuidar nuestro planeta.
+        </p>
+
+        <button onclick="mostrarMision4()">
+            🌿 Ir a Misión 4
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         MISIÓN 4
+    =========================================== -->
+
+    <section id="mision4" class="pantalla oculto">
+
+        <div class="icono">🌿</div>
+
+        <h1>Misión 4</h1>
+
+        <h2>Guardianes de la naturaleza</h2>
+
+        <p>
+            Has llegado a la última misión.
+            Ahora demostrarás todo lo que has aprendido
+            sobre el cuidado y protección de nuestro planeta.
+        </p>
+
+        <p>
+            Esta misión tiene cinco retos y vale
+            <strong>20 puntos</strong>.
+        </p>
+
+        <p>
+            Cada respuesta correcta vale
+            <strong>4 puntos</strong>.
+        </p>
+
+        <button onclick="iniciarMision4()">
+            ▶️ Iniciar Misión 4
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RETO 1 MISIÓN 4
+    =========================================== -->
+
+    <section id="retoM4_1" class="pantalla oculto">
+
+        <h2>🌳 Reto 1</h2>
+
+        <p>
+            ¿Por qué son importantes los árboles para nuestro planeta?
+        </p>
+
+        <button class="opcion" onclick="responderM4Reto1(1)">
+            Porque ayudan a mantener los ecosistemas
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto1(2)">
+            Porque debemos cortarlos todos
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto1(3)">
+            Porque no tienen ninguna función
+        </button>
+
+        <div id="mensajeM4_1" class="mensaje"></div>
+
+        <button id="siguienteM4_1" class="oculto" onclick="mostrarM4Reto2()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RETO 2 MISIÓN 4
+    =========================================== -->
+
+    <section id="retoM4_2" class="pantalla oculto">
+
+        <h2>🐦 Reto 2</h2>
+
+        <p>
+            ¿Cuál es una forma de proteger a los animales?
+        </p>
+
+        <button class="opcion" onclick="responderM4Reto2(1)">
+            Destruir sus lugares donde viven
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto2(2)">
+            Cuidar sus hábitats y evitar dañarlos
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto2(3)">
+            Molestarlos cuando están en su hábitat
+        </button>
+
+        <div id="mensajeM4_2" class="mensaje"></div>
+
+        <button id="siguienteM4_2" class="oculto" onclick="mostrarM4Reto3()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RETO 3 MISIÓN 4
+    =========================================== -->
+
+    <section id="retoM4_3" class="pantalla oculto">
+
+        <h2>🌱 Reto 3</h2>
+
+        <p>
+            ¿Qué debemos hacer para cuidar los ecosistemas?
+        </p>
+
+        <button class="opcion" onclick="responderM4Reto3(1)">
+            Contaminar los ríos
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto3(2)">
+            Destruir la vegetación
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto3(3)">
+            Evitar la contaminación y proteger la naturaleza
+        </button>
+
+        <div id="mensajeM4_3" class="mensaje"></div>
+
+        <button id="siguienteM4_3" class="oculto" onclick="mostrarM4Reto4()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RETO 4 MISIÓN 4
+    =========================================== -->
+
+    <section id="retoM4_4" class="pantalla oculto">
+
+        <h2>🏞️ Reto 4</h2>
+
+        <p>
+            Cuando visitamos un parque o espacio natural,
+            ¿qué debemos hacer?
+        </p>
+
+        <button class="opcion" onclick="responderM4Reto4(1)">
+            Dejar basura en el lugar
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto4(2)">
+            Cuidar el lugar y no dejar residuos
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto4(3)">
+            Dañar las plantas
+        </button>
+
+        <div id="mensajeM4_4" class="mensaje"></div>
+
+        <button id="siguienteM4_4" class="oculto" onclick="mostrarM4Reto5()">
+            ➡️ Siguiente reto
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RETO 5 MISIÓN 4
+    =========================================== -->
+
+    <section id="retoM4_5" class="pantalla oculto">
+
+        <h2>🌎 Reto final</h2>
+
+        <p>
+            Has llegado al último reto.
+            ¿Cuál de estas acciones representa mejor
+            a un verdadero Guardián de la Tierra?
+        </p>
+
+        <button class="opcion" onclick="responderM4Reto5(1)">
+            Cuidar el ambiente solamente cuando alguien observa
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto5(2)">
+            Cuidar los recursos naturales y motivar a otros a hacerlo
+        </button>
+
+        <button class="opcion" onclick="responderM4Reto5(3)">
+            Ignorar los problemas ambientales
+        </button>
+
+        <div id="mensajeM4_5" class="mensaje"></div>
+
+        <button id="finalizarM4" class="oculto" onclick="finalizarMision4()">
+            🏆 Finalizar Misión 4
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         RESULTADO FINAL
+    =========================================== -->
+
+    <section id="resultadoFinal" class="pantalla oculto">
+
+        <div class="icono">🏆</div>
+
+        <h1>¡Misión Planeta completada!</h1>
+
+        <h2>Guardianes de la Tierra</h2>
+
+        <p>
+            Has completado las cuatro misiones.
+        </p>
+
+        <h2 id="puntosFinales"></h2>
+
+        <h2 id="recompensaFinal"></h2>
+
+        <p id="mensajeFinal"></p>
+
+        <button onclick="mostrarPantalla('inicio')">
+            🔄 Volver al inicio
+        </button>
+
+    </section>
+
+
+    <script src="juego.js"></script>
 
 </body>
 
