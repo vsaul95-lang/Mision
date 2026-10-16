@@ -1,687 +1,1021 @@
-// ==========================================
-// CONTROL GENERAL DE PANTALLAS
-// ==========================================
+/* ==========================================
+   NOMBRE DEL JUGADOR
+========================================== */
+
+let nombreJugador = "";
+
+
+/* ==========================================
+   PUNTUACIÓN
+========================================== */
+
+let puntosMision1 = 0;
+
+let puntosMision2 = 0;
+
+let puntosMision3 = 0;
+
+let puntosMision4 = 0;
+
+
+/* ==========================================
+   CONTROL DE ERRORES
+========================================== */
+
+let erroresM1 = [];
+
+let erroresM2 = [];
+
+let erroresM3 = [];
+
+let erroresM4 = [];
+
+
+/* ==========================================
+   NAVEGACIÓN
+========================================== */
 
 function mostrarPantalla(id) {
 
-    const pantallas = document.querySelectorAll(".pantalla");
+    const pantallas =
+        document.querySelectorAll(".pantalla");
+
 
     pantallas.forEach(function(pantalla) {
+
         pantalla.classList.add("oculto");
+
     });
 
-    const pantallaMostrar = document.getElementById(id);
 
-    if (pantallaMostrar) {
-        pantallaMostrar.classList.remove("oculto");
+    const pantallaSeleccionada =
+        document.getElementById(id);
+
+
+    if (pantallaSeleccionada) {
+
+        pantallaSeleccionada.classList.remove("oculto");
     }
 }
 
 
-// ==========================================
-// VARIABLES DE LAS MISIONES
-// ==========================================
+/* ==========================================
+   COMENZAR JUEGO
+========================================== */
 
-let puntosMision1 = 0;
-let puntosMision2 = 0;
-let puntosMision3 = 0;
-let puntosMision4 = 0;
+function comenzarJuego() {
+
+    const campoNombre =
+        document.getElementById("nombreJugador");
 
 
-// ==========================================
-// MISIÓN 1
-// ==========================================
+    const nombre =
+        campoNombre.value.trim();
+
+
+    if (nombre === "") {
+
+        document.getElementById("mensajeNombre").innerHTML =
+            "⚠️ Por favor, escribe tu nombre para comenzar.";
+
+        campoNombre.focus();
+
+        return;
+    }
+
+
+    nombreJugador = nombre;
+
+
+    document.getElementById("mensajeNombre").innerHTML =
+        "";
+
+
+    mostrarMision1();
+}
+
+
+/* ==========================================
+   MISIÓN 1
+========================================== */
 
 function mostrarMision1() {
+
+    puntosMision1 = 0;
+
+    erroresM1 = [];
+
+
     mostrarPantalla("mision1");
 }
 
 
-function iniciarMision1() {
-
-    puntosMision1 = 0;
+function iniciarReto1() {
 
     mostrarPantalla("reto1");
 }
 
 
-function responderReto1(respuesta) {
+/* ==========================================
+   MISIÓN 1 - RETO 1
+========================================== */
 
-    if (respuesta === 2) {
+function responderReto1(correcto) {
+
+    if (correcto) {
 
         puntosMision1 += 2;
 
-        document.getElementById("mensaje1").innerHTML =
-            "✅ ¡Correcto! Reciclar ayuda a reducir los residuos.";
 
-        document.getElementById("siguiente1")
+        document.getElementById("mensajeReto1").innerHTML =
+            "✅ ¡Correcto! Separar los residuos ayuda a reciclar y cuidar el planeta.";
+
+
+        document.getElementById("siguienteReto1")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("reto1");
 
     } else {
 
-        document.getElementById("mensaje1").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            1,
+            erroresM1,
+            "mensajeReto1"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 1 - RETO 2
+========================================== */
+
 function mostrarReto2() {
+
     mostrarPantalla("reto2");
 }
 
 
-function responderReto2(respuesta) {
+function responderReto2(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision1 += 2;
 
-        document.getElementById("mensaje2").innerHTML =
-            "✅ ¡Correcto! Muchas botellas de plástico pueden reciclarse.";
 
-        document.getElementById("siguiente2")
+        document.getElementById("mensajeReto2").innerHTML =
+            "✅ ¡Correcto! Reutilizar permite aprovechar nuevamente los objetos.";
+
+
+        document.getElementById("siguienteReto2")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("reto2");
 
     } else {
 
-        document.getElementById("mensaje2").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            2,
+            erroresM1,
+            "mensajeReto2"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 1 - RETO 3
+========================================== */
+
 function mostrarReto3() {
+
     mostrarPantalla("reto3");
 }
 
 
-function responderReto3(respuesta) {
+function responderReto3(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision1 += 2;
 
-        document.getElementById("mensaje3").innerHTML =
-            "✅ ¡Correcto! Reducir los residuos ayuda a proteger el ambiente.";
 
-        document.getElementById("siguiente3")
+        document.getElementById("mensajeReto3").innerHTML =
+            "✅ ¡Correcto! El papel puede separarse para facilitar su reciclaje.";
+
+
+        document.getElementById("siguienteReto3")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("reto3");
 
     } else {
 
-        document.getElementById("mensaje3").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            3,
+            erroresM1,
+            "mensajeReto3"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 1 - RETO 4
+========================================== */
+
 function mostrarReto4() {
+
     mostrarPantalla("reto4");
 }
 
 
-function responderReto4(respuesta) {
+function responderReto4(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision1 += 2;
 
-        document.getElementById("mensaje4").innerHTML =
-            "✅ ¡Correcto! Reutilizar ayuda a producir menos residuos.";
 
-        document.getElementById("siguiente4")
+        document.getElementById("mensajeReto4").innerHTML =
+            "✅ ¡Correcto! Reutilizar significa volver a utilizar un objeto.";
+
+
+        document.getElementById("siguienteReto4")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("reto4");
 
     } else {
 
-        document.getElementById("mensaje4").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            4,
+            erroresM1,
+            "mensajeReto4"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 1 - RETO 5
+========================================== */
+
 function mostrarReto5() {
+
     mostrarPantalla("reto5");
 }
 
 
-function responderReto5(respuesta) {
+function responderReto5(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision1 += 2;
 
-        document.getElementById("mensaje5").innerHTML =
-            "✅ ¡Correcto! Reutilizar los objetos puede darles una nueva utilidad.";
 
-        document.getElementById("finalizar1")
+        document.getElementById("mensajeReto5").innerHTML =
+            "✅ ¡Correcto! Separar los residuos facilita su reciclaje y manejo.";
+
+
+        document.getElementById("finalMision1")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("reto5");
 
     } else {
 
-        document.getElementById("mensaje5").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            5,
+            erroresM1,
+            "mensajeReto5"
+        );
     }
 }
 
 
-function finalizarMision1() {
+/* ==========================================
+   RESULTADO MISIÓN 1
+========================================== */
+
+function mostrarResultado1() {
 
     document.getElementById("puntosResultado1").innerHTML =
-        "Puntos obtenidos: " + puntosMision1 + " / 10";
+        "Puntos obtenidos: " +
+        puntosMision1 +
+        " / 10";
+
 
     mostrarPantalla("resultado1");
 }
 
 
-// ==========================================
-// MISIÓN 2
-// ==========================================
+/* ==========================================
+   MISIÓN 2
+========================================== */
 
 function mostrarMision2() {
+
+    puntosMision2 = 0;
+
+    erroresM2 = [];
+
+
     mostrarPantalla("mision2");
 }
 
 
 function iniciarMision2() {
 
-    puntosMision2 = 0;
-
     mostrarPantalla("retoM2_1");
 }
 
 
-function responderM2Reto1(respuesta) {
+/* ==========================================
+   MISIÓN 2 - RETO 1
+========================================== */
 
-    if (respuesta === 2) {
+function responderM2Reto1(correcto) {
+
+    if (correcto) {
 
         puntosMision2 += 2;
 
-        document.getElementById("mensajeM2_1").innerHTML =
+
+        document.getElementById("mensajeM2Reto1").innerHTML =
             "✅ ¡Correcto! Cerrar el grifo evita desperdiciar agua.";
 
-        document.getElementById("siguienteM2_1")
+
+        document.getElementById("siguienteM2Reto1")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM2_1");
 
     } else {
 
-        document.getElementById("mensajeM2_1").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            1,
+            erroresM2,
+            "mensajeM2Reto1"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 2 - RETO 2
+========================================== */
+
 function mostrarM2Reto2() {
+
     mostrarPantalla("retoM2_2");
 }
 
 
-function responderM2Reto2(respuesta) {
+function responderM2Reto2(correcto) {
 
-    if (respuesta === 3) {
+    if (correcto) {
 
         puntosMision2 += 2;
 
-        document.getElementById("mensajeM2_2").innerHTML =
-            "✅ ¡Correcto! Cerrar una llave que no se necesita evita desperdiciar agua.";
 
-        document.getElementById("siguienteM2_2")
+        document.getElementById("mensajeM2Reto2").innerHTML =
+            "✅ ¡Correcto! Reparar las fugas ayuda a ahorrar agua.";
+
+
+        document.getElementById("siguienteM2Reto2")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM2_2");
 
     } else {
 
-        document.getElementById("mensajeM2_2").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            2,
+            erroresM2,
+            "mensajeM2Reto2"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 2 - RETO 3
+========================================== */
+
 function mostrarM2Reto3() {
+
     mostrarPantalla("retoM2_3");
 }
 
 
-function responderM2Reto3(respuesta) {
+function responderM2Reto3(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision2 += 2;
 
-        document.getElementById("mensajeM2_3").innerHTML =
-            "✅ ¡Correcto! Reparar las fugas ayuda a ahorrar agua.";
 
-        document.getElementById("siguienteM2_3")
+        document.getElementById("mensajeM2Reto3").innerHTML =
+            "✅ ¡Correcto! El agua es necesaria para los seres vivos.";
+
+
+        document.getElementById("siguienteM2Reto3")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM2_3");
 
     } else {
 
-        document.getElementById("mensajeM2_3").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            3,
+            erroresM2,
+            "mensajeM2Reto3"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 2 - RETO 4
+========================================== */
+
 function mostrarM2Reto4() {
+
     mostrarPantalla("retoM2_4");
 }
 
 
-function responderM2Reto4(respuesta) {
+function responderM2Reto4(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision2 += 2;
 
-        document.getElementById("mensajeM2_4").innerHTML =
-            "✅ ¡Correcto! El agua es necesaria para la vida.";
 
-        document.getElementById("siguienteM2_4")
+        document.getElementById("mensajeM2Reto4").innerHTML =
+            "✅ ¡Correcto! Informar sobre una fuga permite solucionarla.";
+
+
+        document.getElementById("siguienteM2Reto4")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM2_4");
 
     } else {
 
-        document.getElementById("mensajeM2_4").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            4,
+            erroresM2,
+            "mensajeM2Reto4"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 2 - RETO 5
+========================================== */
+
 function mostrarM2Reto5() {
+
     mostrarPantalla("retoM2_5");
 }
 
 
-function responderM2Reto5(respuesta) {
+function responderM2Reto5(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision2 += 2;
 
-        document.getElementById("mensajeM2_5").innerHTML =
-            "✅ ¡Correcto! Utilizar solamente el agua necesaria ayuda a cuidarla.";
 
-        document.getElementById("finalizarM2")
+        document.getElementById("mensajeM2Reto5").innerHTML =
+            "✅ ¡Correcto! Usar el agua solamente cuando es necesaria ayuda a conservarla.";
+
+
+        document.getElementById("finalMision2")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM2_5");
 
     } else {
 
-        document.getElementById("mensajeM2_5").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            5,
+            erroresM2,
+            "mensajeM2Reto5"
+        );
     }
 }
 
 
-function finalizarMision2() {
+/* ==========================================
+   RESULTADO MISIÓN 2
+========================================== */
+
+function mostrarResultado2() {
 
     document.getElementById("puntosResultado2").innerHTML =
-        "Puntos obtenidos: " + puntosMision2 + " / 10";
+        "Puntos obtenidos: " +
+        puntosMision2 +
+        " / 10";
+
 
     mostrarPantalla("resultado2");
 }
 
 
-// ==========================================
-// MISIÓN 3
-// ==========================================
+/* ==========================================
+   MISIÓN 3
+========================================== */
 
 function mostrarMision3() {
+
+    puntosMision3 = 0;
+
+    erroresM3 = [];
+
+
     mostrarPantalla("mision3");
 }
 
 
 function iniciarMision3() {
 
-    puntosMision3 = 0;
-
     mostrarPantalla("retoM3_1");
 }
 
 
-function responderM3Reto1(respuesta) {
+/* ==========================================
+   MISIÓN 3 - RETO 1
+========================================== */
 
-    if (respuesta === 2) {
+function responderM3Reto1(correcto) {
+
+    if (correcto) {
 
         puntosMision3 += 2;
 
-        document.getElementById("mensajeM3_1").innerHTML =
-            "✅ ¡Correcto! Apagar las luces cuando no las necesitamos ayuda a ahorrar energía.";
 
-        document.getElementById("siguienteM3_1")
+        document.getElementById("mensajeM3Reto1").innerHTML =
+            "✅ ¡Correcto! Apagar las luces que no necesitamos ayuda a ahorrar energía.";
+
+
+        document.getElementById("siguienteM3Reto1")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM3_1");
 
     } else {
 
-        document.getElementById("mensajeM3_1").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            1,
+            erroresM3,
+            "mensajeM3Reto1"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 3 - RETO 2
+========================================== */
+
 function mostrarM3Reto2() {
+
     mostrarPantalla("retoM3_2");
 }
 
 
-function responderM3Reto2(respuesta) {
+function responderM3Reto2(correcto) {
 
-    if (respuesta === 2) {
+    if (correcto) {
 
         puntosMision3 += 2;
 
-        document.getElementById("mensajeM3_2").innerHTML =
-            "✅ ¡Correcto! Apagar los aparatos que no utilizamos ayuda a ahorrar electricidad.";
 
-        document.getElementById("siguienteM3_2")
+        document.getElementById("mensajeM3Reto2").innerHTML =
+            "✅ ¡Correcto! Apagar los aparatos cuando no se utilizan ayuda a ahorrar electricidad.";
+
+
+        document.getElementById("siguienteM3Reto2")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM3_2");
 
     } else {
 
-        document.getElementById("mensajeM3_2").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            2,
+            erroresM3,
+            "mensajeM3Reto2"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 3 - RETO 3
+========================================== */
+
 function mostrarM3Reto3() {
+
     mostrarPantalla("retoM3_3");
 }
 
 
-function responderM3Reto3(respuesta) {
+function responderM3Reto3(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision3 += 2;
 
-        document.getElementById("mensajeM3_3").innerHTML =
-            "✅ ¡Correcto! Aprovechar la luz natural permite reducir el uso de electricidad.";
 
-        document.getElementById("siguienteM3_3")
+        document.getElementById("mensajeM3Reto3").innerHTML =
+            "✅ ¡Correcto! Aprovechar la luz natural reduce el uso de electricidad.";
+
+
+        document.getElementById("siguienteM3Reto3")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM3_3");
 
     } else {
 
-        document.getElementById("mensajeM3_3").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            3,
+            erroresM3,
+            "mensajeM3Reto3"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 3 - RETO 4
+========================================== */
+
 function mostrarM3Reto4() {
+
     mostrarPantalla("retoM3_4");
 }
 
 
-function responderM3Reto4(respuesta) {
+function responderM3Reto4(correcto) {
 
-    if (respuesta === 3) {
+    if (correcto) {
 
         puntosMision3 += 2;
 
-        document.getElementById("mensajeM3_4").innerHTML =
-            "✅ ¡Correcto! Desconectar los cargadores cuando no se necesitan es una buena práctica.";
 
-        document.getElementById("siguienteM3_4")
+        document.getElementById("mensajeM3Reto4").innerHTML =
+            "✅ ¡Correcto! Desconectar los cargadores cuando no son necesarios ayuda a evitar el consumo innecesario.";
+
+
+        document.getElementById("siguienteM3Reto4")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM3_4");
 
     } else {
 
-        document.getElementById("mensajeM3_4").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            4,
+            erroresM3,
+            "mensajeM3Reto4"
+        );
     }
 }
 
 
+/* ==========================================
+   MISIÓN 3 - RETO 5
+========================================== */
+
 function mostrarM3Reto5() {
+
     mostrarPantalla("retoM3_5");
 }
 
 
-function responderM3Reto5(respuesta) {
+function responderM3Reto5(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision3 += 2;
 
-        document.getElementById("mensajeM3_5").innerHTML =
-            "✅ ¡Correcto! Utilizar solamente la energía necesaria ayuda a cuidar el planeta.";
 
-        document.getElementById("finalizarM3")
+        document.getElementById("mensajeM3Reto5").innerHTML =
+            "✅ ¡Correcto! Ahorrar energía permite utilizar los recursos de manera responsable.";
+
+
+        document.getElementById("finalMision3")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM3_5");
 
     } else {
 
-        document.getElementById("mensajeM3_5").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            5,
+            erroresM3,
+            "mensajeM3Reto5"
+        );
     }
 }
 
 
-function finalizarMision3() {
+/* ==========================================
+   RESULTADO MISIÓN 3
+========================================== */
+
+function mostrarResultado3() {
 
     document.getElementById("puntosResultado3").innerHTML =
-        "Puntos obtenidos: " + puntosMision3 + " / 10";
+        "Puntos obtenidos: " +
+        puntosMision3 +
+        " / 10";
+
 
     mostrarPantalla("resultado3");
 }
 
 
-// ==========================================
-// MISIÓN 4
-// ==========================================
+/* ==========================================
+   MISIÓN 4
+========================================== */
 
 function mostrarMision4() {
+
+    puntosMision4 = 0;
+
+    erroresM4 = [];
+
+
     mostrarPantalla("mision4");
 }
 
 
 function iniciarMision4() {
 
-    puntosMision4 = 0;
-
     mostrarPantalla("retoM4_1");
 }
 
 
-// ==========================================
-// RETO 1 MISIÓN 4
-// ==========================================
+/* ==========================================
+   MISIÓN 4 - RETO 1
+========================================== */
 
-function responderM4Reto1(respuesta) {
+function responderM4Reto1(correcto) {
 
-    if (respuesta === 1) {
+    if (correcto) {
 
         puntosMision4 += 4;
 
-        document.getElementById("mensajeM4_1").innerHTML =
-            "✅ ¡Correcto! Los árboles son importantes para los ecosistemas.";
 
-        document.getElementById("siguienteM4_1")
+        document.getElementById("mensajeM4Reto1").innerHTML =
+            "✅ ¡Correcto! Cuidar los árboles y las áreas verdes protege la naturaleza.";
+
+
+        document.getElementById("siguienteM4Reto1")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM4_1");
 
     } else {
 
-        document.getElementById("mensajeM4_1").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            1,
+            erroresM4,
+            "mensajeM4Reto1"
+        );
     }
 }
 
 
-// ==========================================
-// RETO 2 MISIÓN 4
-// ==========================================
+/* ==========================================
+   MISIÓN 4 - RETO 2
+========================================== */
 
 function mostrarM4Reto2() {
+
     mostrarPantalla("retoM4_2");
 }
 
 
-function responderM4Reto2(respuesta) {
+function responderM4Reto2(correcto) {
 
-    if (respuesta === 2) {
+    if (correcto) {
 
         puntosMision4 += 4;
 
-        document.getElementById("mensajeM4_2").innerHTML =
-            "✅ ¡Correcto! Cuidar los hábitats ayuda a proteger a los animales.";
 
-        document.getElementById("siguienteM4_2")
+        document.getElementById("mensajeM4Reto2").innerHTML =
+            "✅ ¡Correcto! Respetar las áreas naturales ayuda a conservarlas.";
+
+
+        document.getElementById("siguienteM4Reto2")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM4_2");
 
     } else {
 
-        document.getElementById("mensajeM4_2").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            2,
+            erroresM4,
+            "mensajeM4Reto2"
+        );
     }
 }
 
 
-// ==========================================
-// RETO 3 MISIÓN 4
-// ==========================================
+/* ==========================================
+   MISIÓN 4 - RETO 3
+========================================== */
 
 function mostrarM4Reto3() {
+
     mostrarPantalla("retoM4_3");
 }
 
 
-function responderM4Reto3(respuesta) {
+function responderM4Reto3(correcto) {
 
-    if (respuesta === 3) {
+    if (correcto) {
 
         puntosMision4 += 4;
 
-        document.getElementById("mensajeM4_3").innerHTML =
-            "✅ ¡Correcto! Proteger la naturaleza ayuda a conservar los ecosistemas.";
 
-        document.getElementById("siguienteM4_3")
+        document.getElementById("mensajeM4Reto3").innerHTML =
+            "✅ ¡Correcto! Los animales forman parte importante de los ecosistemas.";
+
+
+        document.getElementById("siguienteM4Reto3")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM4_3");
 
     } else {
 
-        document.getElementById("mensajeM4_3").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            3,
+            erroresM4,
+            "mensajeM4Reto3"
+        );
     }
 }
 
 
-// ==========================================
-// RETO 4 MISIÓN 4
-// ==========================================
+/* ==========================================
+   MISIÓN 4 - RETO 4
+========================================== */
 
 function mostrarM4Reto4() {
+
     mostrarPantalla("retoM4_4");
 }
 
 
-function responderM4Reto4(respuesta) {
+function responderM4Reto4(correcto) {
 
-    if (respuesta === 2) {
+    if (correcto) {
 
         puntosMision4 += 4;
 
-        document.getElementById("mensajeM4_4").innerHTML =
-            "✅ ¡Correcto! Debemos cuidar los espacios naturales y no dejar residuos.";
 
-        document.getElementById("siguienteM4_4")
+        document.getElementById("mensajeM4Reto4").innerHTML =
+            "✅ ¡Correcto! Cuidar los espacios naturales ayuda a proteger la biodiversidad.";
+
+
+        document.getElementById("siguienteM4Reto4")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM4_4");
 
     } else {
 
-        document.getElementById("mensajeM4_4").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            4,
+            erroresM4,
+            "mensajeM4Reto4"
+        );
     }
 }
 
 
-// ==========================================
-// RETO 5 MISIÓN 4
-// ==========================================
+/* ==========================================
+   MISIÓN 4 - RETO 5
+========================================== */
 
 function mostrarM4Reto5() {
+
     mostrarPantalla("retoM4_5");
 }
 
 
-function responderM4Reto5(respuesta) {
+function responderM4Reto5(correcto) {
 
-    if (respuesta === 2) {
+    if (correcto) {
 
         puntosMision4 += 4;
 
-        document.getElementById("mensajeM4_5").innerHTML =
-            "✅ ¡Excelente! Un verdadero Guardián cuida el planeta y ayuda a otros a hacerlo.";
 
-        document.getElementById("finalizarM4")
+        document.getElementById("mensajeM4Reto5").innerHTML =
+            "✅ ¡Excelente! Esa es una actitud propia de un Guardián de la Tierra.";
+
+
+        document.getElementById("finalJuego")
             .classList.remove("oculto");
+
+
+        bloquearPregunta("retoM4_5");
 
     } else {
 
-        document.getElementById("mensajeM4_5").innerHTML =
-            "❌ Esa no es la respuesta. Intenta nuevamente.";
+        aplicarError(
+            5,
+            erroresM4,
+            "mensajeM4Reto5"
+        );
     }
 }
 
 
-// ==========================================
-// RESULTADO FINAL
-// ==========================================
+/* ==========================================
+   FINAL DEL JUEGO
+========================================== */
 
-function finalizarMision4() {
+function finalizarJuego() {
 
-    let puntosTotales =
+    const total =
         puntosMision1 +
         puntosMision2 +
         puntosMision3 +
         puntosMision4;
 
 
-    document.getElementById("puntosFinales").innerHTML =
-        "Puntaje final: " + puntosTotales + " / 50";
+    /* MOSTRAR NOMBRE */
 
+    document.getElementById("nombreFinal").innerHTML =
+        "🎉 ¡Felicidades, " +
+        nombreJugador +
+        "! 🎉";
+
+
+    /* MOSTRAR PUNTAJE */
+
+    document.getElementById("puntosFinales").innerHTML =
+        "Puntaje final: " +
+        total +
+        " / 50";
+
+
+    /* DETERMINAR RECOMPENSA */
 
     let recompensa = "";
-    let mensaje = "";
 
 
-    if (puntosTotales >= 45) {
+    if (total >= 45) {
 
-        recompensa = "🏆 Guardián Experto de la Tierra";
+        recompensa =
+            "🏆 Guardián Experto de la Tierra";
 
-        mensaje =
-            "¡Excelente trabajo! Has demostrado un gran conocimiento " +
-            "sobre el cuidado y protección de nuestro planeta.";
+    } else if (total >= 35) {
 
-    }
+        recompensa =
+            "🌎 Guardián de la Tierra";
 
-    else if (puntosTotales >= 35) {
+    } else if (total >= 25) {
 
-        recompensa = "🌎 Guardián de la Tierra";
+        recompensa =
+            "🌱 Aprendiz de Guardián";
 
-        mensaje =
-            "¡Muy bien! Has demostrado que puedes realizar acciones " +
-            "responsables para cuidar nuestro planeta.";
+    } else {
 
-    }
-
-    else if (puntosTotales >= 25) {
-
-        recompensa = "🌱 Aprendiz de Guardián";
-
-        mensaje =
-            "¡Buen trabajo! Has aprendido aspectos importantes " +
-            "sobre el cuidado del planeta. Sigue practicando.";
-
-    }
-
-    else {
-
-        recompensa = "🔎 Explorador del Planeta";
-
-        mensaje =
-            "Has comenzado tu aventura como Guardián de la Tierra. " +
-            "Continúa aprendiendo y practicando acciones para cuidar el ambiente.";
-
+        recompensa =
+            "🔎 Explorador del Planeta";
     }
 
 
@@ -689,9 +1023,179 @@ function finalizarMision4() {
         recompensa;
 
 
-    document.getElementById("mensajeFinal").innerHTML =
-        mensaje;
-
+    /* MOSTRAR RESULTADO */
 
     mostrarPantalla("resultadoFinal");
+
+
+    /* LANZAR GLOBOS */
+
+    lanzarGlobos();
+}
+
+
+/* ==========================================
+   BLOQUEAR PREGUNTA
+========================================== */
+
+function bloquearPregunta(idReto) {
+
+    const reto =
+        document.getElementById(idReto);
+
+
+    if (!reto) {
+
+        return;
+    }
+
+
+    const botones =
+        reto.querySelectorAll("button");
+
+
+    botones.forEach(function(boton) {
+
+        const funcion =
+            boton.getAttribute("onclick");
+
+
+        if (
+            funcion &&
+            funcion.includes("responder")
+        ) {
+
+            boton.disabled = true;
+        }
+
+    });
+}
+
+
+/* ==========================================
+   CONTROL DE ERRORES
+========================================== */
+
+function aplicarError(
+    numeroReto,
+    listaErrores,
+    idMensaje
+) {
+
+    /*
+       Cada reto solamente recibe una penalización
+       aunque el estudiante se equivoque varias veces.
+    */
+
+
+    if (!listaErrores.includes(numeroReto)) {
+
+        listaErrores.push(numeroReto);
+
+
+        if (listaErrores === erroresM1) {
+
+            puntosMision1 -= 1;
+
+        } else if (listaErrores === erroresM2) {
+
+            puntosMision2 -= 1;
+
+        } else if (listaErrores === erroresM3) {
+
+            puntosMision3 -= 1;
+
+        } else if (listaErrores === erroresM4) {
+
+            puntosMision4 -= 1;
+        }
+    }
+
+
+    document.getElementById(idMensaje).innerHTML =
+        "❌ Esa no es la respuesta. Intenta nuevamente.";
+}
+
+
+/* ==========================================
+   GLOBOS
+========================================== */
+
+function lanzarGlobos() {
+
+    const contenedor =
+        document.createElement("div");
+
+
+    contenedor.className =
+        "globos";
+
+
+    document.body.appendChild(
+        contenedor
+    );
+
+
+    const cantidadGlobos = 18;
+
+
+    for (
+        let i = 0;
+        i < cantidadGlobos;
+        i++
+    ) {
+
+        const globo =
+            document.createElement("div");
+
+
+        globo.className =
+            "globo";
+
+
+        /* POSICIÓN HORIZONTAL */
+
+        globo.style.left =
+            Math.random() * 100 + "%";
+
+
+        /* TAMAÑO */
+
+        const tamaño =
+            35 + Math.random() * 25;
+
+
+        globo.style.width =
+            tamaño + "px";
+
+
+        globo.style.height =
+            tamaño * 1.2 + "px";
+
+
+        /* VELOCIDAD */
+
+        globo.style.animationDuration =
+            (4 + Math.random() * 3) + "s";
+
+
+        /* RETRASO */
+
+        globo.style.animationDelay =
+            (Math.random() * 1.5) + "s";
+
+
+        contenedor.appendChild(
+            globo
+        );
+    }
+
+
+    /* ELIMINAR GLOBOS */
+
+    setTimeout(function() {
+
+        contenedor.remove();
+
+    }, 8000);
 }
