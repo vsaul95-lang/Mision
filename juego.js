@@ -36,13 +36,7 @@ let erroresM4 = [];
    SEGUIMIENTO DEL PROGRESO
 ========================================== */
 
-/*
-   Una misión se marca como completada cuando
-   el jugador llega a su pantalla de resultados.
-*/
-
 let misionesCompletadas = [false, false, false, false];
-
 let misionActual = 0;
 
 
@@ -57,21 +51,18 @@ const configuracionMisiones = {
         puntosMaximos: 10,
         puntosCorrectos: 2
     },
-
     2: {
         nombre: "Guardianes del agua",
         logro: "💧 Guardián del agua",
         puntosMaximos: 10,
         puntosCorrectos: 2
     },
-
     3: {
         nombre: "Guardianes de la energía",
         logro: "⚡ Ahorrador de energía",
         puntosMaximos: 10,
         puntosCorrectos: 2
     },
-
     4: {
         nombre: "Guardianes de la naturaleza",
         logro: "🌱 Protector de la naturaleza",
@@ -118,31 +109,20 @@ function ocultarElemento(id) {
 
 
 function obtenerPuntuacionTotal() {
-    return (
-        puntosMision1 +
+    return puntosMision1 +
         puntosMision2 +
         puntosMision3 +
-        puntosMision4
-    );
+        puntosMision4;
 }
 
 
 function obtenerPuntuacionMision(numero) {
     switch (numero) {
-        case 1:
-            return puntosMision1;
-
-        case 2:
-            return puntosMision2;
-
-        case 3:
-            return puntosMision3;
-
-        case 4:
-            return puntosMision4;
-
-        default:
-            return 0;
+        case 1: return puntosMision1;
+        case 2: return puntosMision2;
+        case 3: return puntosMision3;
+        case 4: return puntosMision4;
+        default: return 0;
     }
 }
 
@@ -152,15 +132,12 @@ function establecerPuntuacionMision(numero, valor) {
         case 1:
             puntosMision1 = valor;
             break;
-
         case 2:
             puntosMision2 = valor;
             break;
-
         case 3:
             puntosMision3 = valor;
             break;
-
         case 4:
             puntosMision4 = valor;
             break;
@@ -170,20 +147,11 @@ function establecerPuntuacionMision(numero, valor) {
 
 function obtenerErroresMision(numero) {
     switch (numero) {
-        case 1:
-            return erroresM1;
-
-        case 2:
-            return erroresM2;
-
-        case 3:
-            return erroresM3;
-
-        case 4:
-            return erroresM4;
-
-        default:
-            return [];
+        case 1: return erroresM1;
+        case 2: return erroresM2;
+        case 3: return erroresM3;
+        case 4: return erroresM4;
+        default: return [];
     }
 }
 
@@ -193,9 +161,7 @@ function obtenerErroresMision(numero) {
 ========================================== */
 
 function mostrarPantalla(id) {
-
-    const pantallas =
-        document.querySelectorAll(".pantalla");
+    const pantallas = document.querySelectorAll(".pantalla");
 
     pantallas.forEach(function(pantalla) {
         pantalla.classList.add("oculto");
@@ -207,22 +173,14 @@ function mostrarPantalla(id) {
         pantallaSeleccionada.classList.remove("oculto");
     }
 
-    /*
-       Identificar la misión actual para el tablero.
-    */
-
     if (/^(mision1|reto[1-5]|resultado1)$/.test(id)) {
         misionActual = 1;
-
     } else if (/^(mision2|retoM2_[1-5]|resultado2)$/.test(id)) {
         misionActual = 2;
-
     } else if (/^(mision3|retoM3_[1-5]|resultado3)$/.test(id)) {
         misionActual = 3;
-
     } else if (/^(mision4|retoM4_[1-5]|resultadoFinal)$/.test(id)) {
         misionActual = 4;
-
     } else if (id === "inicio") {
         misionActual = 0;
     }
@@ -236,37 +194,39 @@ function mostrarPantalla(id) {
 ========================================== */
 
 function comenzarJuego() {
-
     const campoNombre = obtenerElemento("nombreJugador");
 
     if (!campoNombre) {
+        console.error('No se encontró el campo con id="nombreJugador".');
         return;
     }
 
     const nombre = campoNombre.value.trim();
 
     if (nombre === "") {
-
         establecerTexto(
             "mensajeNombre",
             "⚠️ Por favor, escribe tu nombre para comenzar."
         );
 
         campoNombre.focus();
-
         return;
     }
-
-    nombreJugador = nombre;
 
     establecerTexto("mensajeNombre", "");
 
     /*
-       Empezar una partida nueva desde cero.
+       IMPORTANTE:
+       Primero se reinician los datos.
+       Después se guarda el nombre.
+       Así no se borra al iniciar la partida.
     */
 
     reiniciarDatosJuego();
 
+    nombreJugador = nombre;
+
+    actualizarTablero();
     mostrarMision1();
 }
 
@@ -276,50 +236,60 @@ function comenzarJuego() {
 ========================================== */
 
 function actualizarTablero() {
-
     const tablero = obtenerElemento("tableroProgreso");
-
-    /*
-       El tablero se añadirá al index.html.
-       Mientras no exista, el juego continúa funcionando.
-    */
 
     if (!tablero) {
         return;
     }
 
-    /*
-       Ocultar el tablero en la pantalla inicial.
-    */
-
     if (misionActual === 0) {
-
         tablero.classList.add("oculto");
-
         return;
-
-    } else {
-
-        tablero.classList.remove("oculto");
     }
+
+    tablero.classList.remove("oculto");
 
     const total = obtenerPuntuacionTotal();
 
     const cantidadCompletadas =
         misionesCompletadas.filter(Boolean).length;
 
-    const porcentaje =
-        Math.round((cantidadCompletadas / 4) * 100);
+    const porcentaje = Math.round(
+        (cantidadCompletadas / 4) * 100
+    );
+
+    /*
+       Nombre del jugador.
+    */
 
     establecerTexto(
         "nombreTablero",
         nombreJugador || "Jugador"
     );
 
+    /*
+       Puntuación acumulada.
+    */
+
     establecerTexto(
         "puntosTablero",
         total + " / 50 puntos"
     );
+
+    /*
+       Actualizar el contador principal de misiones.
+       Este elemento puede ser el que muestra:
+       "🏁 Misiones 0 de 4".
+    */
+
+    establecerTexto(
+        "misionesTablero",
+        "🏁 Misiones " + cantidadCompletadas + " de 4"
+    );
+
+    /*
+       Actualizar el texto descriptivo del progreso.
+    */
 
     establecerTexto(
         "textoProgreso",
@@ -328,6 +298,10 @@ function actualizarTablero() {
         porcentaje +
         "%)"
     );
+
+    /*
+       Actualizar la barra visual.
+    */
 
     const barra = obtenerElemento("barraProgresoRelleno");
 
@@ -341,18 +315,21 @@ function actualizarTablero() {
     */
 
     for (let numero = 1; numero <= 4; numero++) {
+        const completada = misionesCompletadas[numero - 1];
 
-        const estado = obtenerElemento("estadoMision" + numero);
-        const logro = obtenerElemento("logroMision" + numero);
+        const estado = obtenerElemento(
+            "estadoMision" + numero
+        );
+
+        const logro = obtenerElemento(
+            "logroMision" + numero
+        );
 
         let textoEstado = "🔒 Pendiente";
 
-        if (misionesCompletadas[numero - 1]) {
-
+        if (completada) {
             textoEstado = "✅ Completada";
-
         } else if (misionActual === numero) {
-
             textoEstado = "▶️ En curso";
         }
 
@@ -361,27 +338,22 @@ function actualizarTablero() {
 
             estado.classList.toggle(
                 "mision-completada",
-                misionesCompletadas[numero - 1]
+                completada
             );
 
             estado.classList.toggle(
                 "mision-en-curso",
-                !misionesCompletadas[numero - 1] &&
-                misionActual === numero
+                !completada && misionActual === numero
             );
         }
 
         if (logro) {
-
-            if (misionesCompletadas[numero - 1]) {
-
+            if (completada) {
                 logro.textContent =
                     configuracionMisiones[numero].logro;
 
                 logro.classList.add("logro-desbloqueado");
-
             } else {
-
                 logro.textContent = "🔒 Logro pendiente";
 
                 logro.classList.remove("logro-desbloqueado");
@@ -396,7 +368,6 @@ function actualizarTablero() {
 ========================================== */
 
 function completarMision(numero) {
-
     if (numero < 1 || numero > 4) {
         return;
     }
@@ -412,11 +383,9 @@ function completarMision(numero) {
 ========================================== */
 
 function reiniciarMision(numero) {
-
     establecerPuntuacionMision(numero, 0);
 
     const errores = obtenerErroresMision(numero);
-
     errores.length = 0;
 }
 
@@ -426,15 +395,12 @@ function reiniciarMision(numero) {
 ========================================== */
 
 function mostrarMision1() {
-
     reiniciarMision(1);
-
     mostrarPantalla("mision1");
 }
 
 
 function iniciarReto1() {
-
     mostrarPantalla("reto1");
 }
 
@@ -444,7 +410,6 @@ function iniciarReto1() {
 ========================================== */
 
 function responderReto1(correcto) {
-
     procesarRespuesta({
         numeroMision: 1,
         numeroReto: 1,
@@ -468,7 +433,6 @@ function mostrarReto2() {
 
 
 function responderReto2(correcto) {
-
     procesarRespuesta({
         numeroMision: 1,
         numeroReto: 2,
@@ -492,7 +456,6 @@ function mostrarReto3() {
 
 
 function responderReto3(correcto) {
-
     procesarRespuesta({
         numeroMision: 1,
         numeroReto: 3,
@@ -516,7 +479,6 @@ function mostrarReto4() {
 
 
 function responderReto4(correcto) {
-
     procesarRespuesta({
         numeroMision: 1,
         numeroReto: 4,
@@ -540,7 +502,6 @@ function mostrarReto5() {
 
 
 function responderReto5(correcto) {
-
     procesarRespuesta({
         numeroMision: 1,
         numeroReto: 5,
@@ -559,14 +520,12 @@ function responderReto5(correcto) {
 ========================================== */
 
 function mostrarResultado1() {
-
     establecerTexto(
         "puntosResultado1",
         "Puntos obtenidos: " + puntosMision1 + " / 10"
     );
 
     completarMision(1);
-
     mostrarPantalla("resultado1");
 }
 
@@ -576,9 +535,7 @@ function mostrarResultado1() {
 ========================================== */
 
 function mostrarMision2() {
-
     reiniciarMision(2);
-
     mostrarPantalla("mision2");
 }
 
@@ -593,7 +550,6 @@ function iniciarMision2() {
 ========================================== */
 
 function responderM2Reto1(correcto) {
-
     procesarRespuesta({
         numeroMision: 2,
         numeroReto: 1,
@@ -617,7 +573,6 @@ function mostrarM2Reto2() {
 
 
 function responderM2Reto2(correcto) {
-
     procesarRespuesta({
         numeroMision: 2,
         numeroReto: 2,
@@ -641,7 +596,6 @@ function mostrarM2Reto3() {
 
 
 function responderM2Reto3(correcto) {
-
     procesarRespuesta({
         numeroMision: 2,
         numeroReto: 3,
@@ -665,7 +619,6 @@ function mostrarM2Reto4() {
 
 
 function responderM2Reto4(correcto) {
-
     procesarRespuesta({
         numeroMision: 2,
         numeroReto: 4,
@@ -689,7 +642,6 @@ function mostrarM2Reto5() {
 
 
 function responderM2Reto5(correcto) {
-
     procesarRespuesta({
         numeroMision: 2,
         numeroReto: 5,
@@ -708,14 +660,12 @@ function responderM2Reto5(correcto) {
 ========================================== */
 
 function mostrarResultado2() {
-
     establecerTexto(
         "puntosResultado2",
         "Puntos obtenidos: " + puntosMision2 + " / 10"
     );
 
     completarMision(2);
-
     mostrarPantalla("resultado2");
 }
 
@@ -725,9 +675,7 @@ function mostrarResultado2() {
 ========================================== */
 
 function mostrarMision3() {
-
     reiniciarMision(3);
-
     mostrarPantalla("mision3");
 }
 
@@ -742,7 +690,6 @@ function iniciarMision3() {
 ========================================== */
 
 function responderM3Reto1(correcto) {
-
     procesarRespuesta({
         numeroMision: 3,
         numeroReto: 1,
@@ -766,7 +713,6 @@ function mostrarM3Reto2() {
 
 
 function responderM3Reto2(correcto) {
-
     procesarRespuesta({
         numeroMision: 3,
         numeroReto: 2,
@@ -790,7 +736,6 @@ function mostrarM3Reto3() {
 
 
 function responderM3Reto3(correcto) {
-
     procesarRespuesta({
         numeroMision: 3,
         numeroReto: 3,
@@ -814,7 +759,6 @@ function mostrarM3Reto4() {
 
 
 function responderM3Reto4(correcto) {
-
     procesarRespuesta({
         numeroMision: 3,
         numeroReto: 4,
@@ -838,7 +782,6 @@ function mostrarM3Reto5() {
 
 
 function responderM3Reto5(correcto) {
-
     procesarRespuesta({
         numeroMision: 3,
         numeroReto: 5,
@@ -857,14 +800,12 @@ function responderM3Reto5(correcto) {
 ========================================== */
 
 function mostrarResultado3() {
-
     establecerTexto(
         "puntosResultado3",
         "Puntos obtenidos: " + puntosMision3 + " / 10"
     );
 
     completarMision(3);
-
     mostrarPantalla("resultado3");
 }
 
@@ -874,9 +815,7 @@ function mostrarResultado3() {
 ========================================== */
 
 function mostrarMision4() {
-
     reiniciarMision(4);
-
     mostrarPantalla("mision4");
 }
 
@@ -891,7 +830,6 @@ function iniciarMision4() {
 ========================================== */
 
 function responderM4Reto1(correcto) {
-
     procesarRespuesta({
         numeroMision: 4,
         numeroReto: 1,
@@ -915,7 +853,6 @@ function mostrarM4Reto2() {
 
 
 function responderM4Reto2(correcto) {
-
     procesarRespuesta({
         numeroMision: 4,
         numeroReto: 2,
@@ -939,7 +876,6 @@ function mostrarM4Reto3() {
 
 
 function responderM4Reto3(correcto) {
-
     procesarRespuesta({
         numeroMision: 4,
         numeroReto: 3,
@@ -963,7 +899,6 @@ function mostrarM4Reto4() {
 
 
 function responderM4Reto4(correcto) {
-
     procesarRespuesta({
         numeroMision: 4,
         numeroReto: 4,
@@ -987,7 +922,6 @@ function mostrarM4Reto5() {
 
 
 function responderM4Reto5(correcto) {
-
     procesarRespuesta({
         numeroMision: 4,
         numeroReto: 5,
@@ -1005,13 +939,7 @@ function responderM4Reto5(correcto) {
    PROCESAR RESPUESTAS
 ========================================== */
 
-/*
-   Esta función centraliza el funcionamiento de
-   las respuestas de los 20 retos.
-*/
-
 function procesarRespuesta(datos) {
-
     const {
         numeroMision,
         numeroReto,
@@ -1025,30 +953,24 @@ function procesarRespuesta(datos) {
     const reto = obtenerElemento(idPantallaReto);
 
     if (!reto) {
+        console.error("No se encontró la pantalla del reto:", idPantallaReto);
         return;
     }
 
-    /*
-       Evitar procesar una respuesta si el reto
-       ya fue contestado correctamente.
-    */
+    const botonesRespuesta = reto.querySelectorAll("button.opcion");
 
-    const botonesRespuesta =
-        reto.querySelectorAll('button.opcion');
-
-    const yaRespondido =
-        Array.from(botonesRespuesta).some(function(boton) {
+    const yaRespondido = Array.from(botonesRespuesta).some(
+        function(boton) {
             return boton.disabled;
-        });
+        }
+    );
 
     if (yaRespondido) {
         return;
     }
 
     if (correcto) {
-
-        const configuracion =
-            configuracionMisiones[numeroMision];
+        const configuracion = configuracionMisiones[numeroMision];
 
         establecerPuntuacionMision(
             numeroMision,
@@ -1057,13 +979,9 @@ function procesarRespuesta(datos) {
         );
 
         establecerTexto(idMensaje, mensajeCorrecto);
-
         mostrarElemento(idSiguiente);
-
         bloquearPregunta(idPantallaReto);
-
     } else {
-
         aplicarError(
             numeroReto,
             obtenerErroresMision(numeroMision),
@@ -1081,66 +999,36 @@ function procesarRespuesta(datos) {
 ========================================== */
 
 function finalizarJuego() {
-
     completarMision(4);
 
     const total = obtenerPuntuacionTotal();
 
-    /*
-       Mostrar nombre del jugador.
-    */
-
     establecerTexto(
         "nombreFinal",
-        "🎉 ¡Felicidades, " + nombreJugador + "! 🎉"
+        "🎉 ¡Felicidades, " + (nombreJugador || "Guardián") + "! 🎉"
     );
-
-    /*
-       Mostrar puntuación.
-    */
 
     establecerTexto(
         "puntosFinales",
         "Puntaje final: " + total + " / 50"
     );
 
-    /*
-       Determinar insignia final.
-    */
-
     let recompensa = "";
 
     if (total >= 45) {
-
         recompensa = "🏆 Guardián Experto de la Tierra";
-
     } else if (total >= 35) {
-
         recompensa = "🌎 Guardián de la Tierra";
-
     } else if (total >= 25) {
-
         recompensa = "🌱 Aprendiz de Guardián";
-
     } else {
-
         recompensa = "🔎 Explorador del Planeta";
     }
 
     establecerTexto("recompensaFinal", recompensa);
 
-    /*
-       Mostrar resultado final.
-    */
-
     mostrarPantalla("resultadoFinal");
-
-    /*
-       Actualizar tablero y lanzar globos.
-    */
-
     actualizarTablero();
-
     lanzarGlobos();
 }
 
@@ -1150,19 +1038,17 @@ function finalizarJuego() {
 ========================================== */
 
 function bloquearPregunta(idReto) {
-
     const reto = obtenerElemento(idReto);
 
     if (!reto) {
         return;
     }
 
-    const botones =
-        reto.querySelectorAll('button.opcion');
-
-    botones.forEach(function(boton) {
-        boton.disabled = true;
-    });
+    reto.querySelectorAll("button.opcion").forEach(
+        function(boton) {
+            boton.disabled = true;
+        }
+    );
 }
 
 
@@ -1170,20 +1056,13 @@ function bloquearPregunta(idReto) {
    CONTROL DE ERRORES Y PENALIZACIONES
 ========================================== */
 
-/*
-   Cada reto descuenta un punto solamente una vez,
-   aunque el estudiante se equivoque varias veces.
-*/
-
 function aplicarError(
     numeroReto,
     listaErrores,
     idMensaje,
     numeroMision
 ) {
-
     if (!listaErrores.includes(numeroReto)) {
-
         listaErrores.push(numeroReto);
 
         establecerPuntuacionMision(
@@ -1206,16 +1085,7 @@ function aplicarError(
 ========================================== */
 
 function volverAlInicio() {
-
-    /*
-       Reiniciar todos los datos de la partida.
-    */
-
     reiniciarDatosJuego();
-
-    /*
-       Limpiar el nombre.
-    */
 
     const campoNombre = obtenerElemento("nombreJugador");
 
@@ -1225,20 +1095,12 @@ function volverAlInicio() {
 
     establecerTexto("mensajeNombre", "");
 
-    /*
-       Limpiar los resultados.
-    */
-
     establecerTexto("puntosResultado1", "");
     establecerTexto("puntosResultado2", "");
     establecerTexto("puntosResultado3", "");
     establecerTexto("nombreFinal", "");
     establecerTexto("puntosFinales", "");
     establecerTexto("recompensaFinal", "");
-
-    /*
-       Cerrar la ventana de instrucciones si está abierta.
-    */
 
     const ventanaInstrucciones =
         obtenerElemento("ventanaInstrucciones");
@@ -1251,20 +1113,13 @@ function volverAlInicio() {
         ventanaInstrucciones.close();
     }
 
-    /*
-       Eliminar globos que puedan quedar en pantalla.
-    */
-
-    document.querySelectorAll(".globos").forEach(function(globos) {
-        globos.remove();
-    });
-
-    /*
-       Regresar a la pantalla inicial.
-    */
+    document.querySelectorAll(".globos").forEach(
+        function(globos) {
+            globos.remove();
+        }
+    );
 
     mostrarPantalla("inicio");
-
     actualizarTablero();
 
     if (campoNombre) {
@@ -1278,6 +1133,11 @@ function volverAlInicio() {
 ========================================== */
 
 function reiniciarDatosJuego() {
+    /*
+       Esta función reinicia los datos de la partida.
+       No guarda el nombre: comenzarJuego() lo asigna
+       después de ejecutar esta función.
+    */
 
     nombreJugador = "";
 
@@ -1292,12 +1152,7 @@ function reiniciarDatosJuego() {
     erroresM4 = [];
 
     misionesCompletadas = [false, false, false, false];
-
     misionActual = 0;
-
-    /*
-       Limpiar mensajes de todos los retos.
-    */
 
     const idsMensajes = [
         "mensajeReto1",
@@ -1329,11 +1184,6 @@ function reiniciarDatosJuego() {
         establecerTexto(id, "");
     });
 
-    /*
-       Ocultar botones que solamente aparecen
-       después de responder correctamente.
-    */
-
     const idsBotonesSiguiente = [
         "siguienteReto1",
         "siguienteReto2",
@@ -1364,18 +1214,11 @@ function reiniciarDatosJuego() {
         ocultarElemento(id);
     });
 
-    /*
-       Reactivar las respuestas de todos los retos.
-    */
-
-    document.querySelectorAll(".pantalla button.opcion")
-        .forEach(function(boton) {
+    document.querySelectorAll(".pantalla button.opcion").forEach(
+        function(boton) {
             boton.disabled = false;
-        });
-
-    /*
-       Restablecer el tablero.
-    */
+        }
+    );
 
     actualizarTablero();
 }
@@ -1386,17 +1229,13 @@ function reiniciarDatosJuego() {
 ========================================== */
 
 function lanzarGlobos() {
-
-    /*
-       Evitar duplicar la animación si ya existe.
-    */
-
-    document.querySelectorAll(".globos").forEach(function(globos) {
-        globos.remove();
-    });
+    document.querySelectorAll(".globos").forEach(
+        function(globos) {
+            globos.remove();
+        }
+    );
 
     const contenedor = document.createElement("div");
-
     contenedor.className = "globos";
 
     document.body.appendChild(contenedor);
@@ -1404,29 +1243,15 @@ function lanzarGlobos() {
     const cantidadGlobos = 18;
 
     for (let i = 0; i < cantidadGlobos; i++) {
-
         const globo = document.createElement("div");
-
         globo.className = "globo";
 
-        /*
-           Posición horizontal.
-        */
-
         globo.style.left = Math.random() * 100 + "%";
-
-        /*
-           Tamaño.
-        */
 
         const tamano = 35 + Math.random() * 25;
 
         globo.style.width = tamano + "px";
         globo.style.height = tamano * 1.2 + "px";
-
-        /*
-           Velocidad y retraso.
-        */
 
         globo.style.animationDuration =
             (4 + Math.random() * 3) + "s";
@@ -1437,16 +1262,10 @@ function lanzarGlobos() {
         contenedor.appendChild(globo);
     }
 
-    /*
-       Retirar los globos después de la animación.
-    */
-
     setTimeout(function() {
-
         if (contenedor.isConnected) {
             contenedor.remove();
         }
-
     }, 8000);
 }
 
@@ -1456,7 +1275,5 @@ function lanzarGlobos() {
 ========================================== */
 
 document.addEventListener("DOMContentLoaded", function() {
-
     actualizarTablero();
-
 });
