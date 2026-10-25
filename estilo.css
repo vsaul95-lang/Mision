@@ -7,29 +7,61 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4facfe, #00c853);
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
 }
 
+body {
+    margin: 0;
+    padding: 22px;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00c853);
+    color: #222;
+}
+
+/* ==========================================
+   DISTRIBUCIÓN PRINCIPAL
+   Tablero a la izquierda y juego a la derecha
+========================================== */
+
+.contenedor-juego {
+    display: grid;
+    grid-template-columns: 245px minmax(0, 1fr);
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* La pantalla de inicio se mantiene centrada */
+
+#inicio {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 760px;
+}
+
+/* Área donde aparecen las misiones y los retos */
+
+.area-juego {
+    min-width: 0;
+    width: 100%;
+}
 
 /* ==========================================
    PANTALLAS
 ========================================== */
 
 .pantalla {
-    width: 90%;
-    max-width: 700px;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
     padding: 30px;
-    background-color: white;
+    background-color: #fff;
     border-radius: 25px;
     text-align: center;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
@@ -39,7 +71,6 @@ body {
 .oculto {
     display: none !important;
 }
-
 
 /* ==========================================
    TÍTULOS
@@ -57,6 +88,9 @@ h2 {
     line-height: 1.3;
 }
 
+h3 {
+    line-height: 1.3;
+}
 
 /* ==========================================
    TEXTO
@@ -68,16 +102,14 @@ p {
     line-height: 1.5;
 }
 
-
 /* ==========================================
    ICONOS
 ========================================== */
 
 .icono {
-    font-size: 48px;
     margin-bottom: 8px;
+    font-size: 48px;
 }
-
 
 /* ==========================================
    DATOS DEL PROYECTO
@@ -105,7 +137,6 @@ p {
     margin-bottom: 5px;
     color: #333;
 }
-
 
 /* ==========================================
    REGISTRO DEL JUGADOR
@@ -147,7 +178,6 @@ p {
     color: #d32f2f;
 }
 
-
 /* ==========================================
    BOTONES
 ========================================== */
@@ -160,12 +190,14 @@ button {
     border: none;
     border-radius: 12px;
     background-color: #1976d2;
-    color: white;
+    color: #fff;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.3;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
+    transition:
+        transform 0.2s,
+        background-color 0.2s;
 }
 
 button:hover {
@@ -183,7 +215,6 @@ button:focus-visible {
     outline-offset: 3px;
 }
 
-
 /* ==========================================
    BOTÓN DE INSTRUCCIONES
 ========================================== */
@@ -196,15 +227,14 @@ button:focus-visible {
     background-color: #106b3b;
 }
 
-
 /* ==========================================
-   OPCIONES
+   OPCIONES DE RESPUESTA
 ========================================== */
 
 .opcion {
-    background-color: #eeeeee;
+    background-color: #eee;
     color: #222;
-    border: 2px solid #dddddd;
+    border: 2px solid #ddd;
     font-weight: normal;
     text-align: center;
 }
@@ -213,9 +243,8 @@ button:focus-visible {
     background-color: #e0e0e0;
 }
 
-
 /* ==========================================
-   MENSAJES
+   MENSAJES DE RESPUESTA
 ========================================== */
 
 .mensaje {
@@ -226,94 +255,119 @@ button:focus-visible {
     font-weight: bold;
 }
 
-
 /* ==========================================
-   RESULTADOS
+   RESULTADOS DE LAS MISIONES
 ========================================== */
 
 #puntosResultado1,
 #puntosResultado2,
 #puntosResultado3 {
-    font-size: 22px;
     margin: 12px 0;
+    font-size: 22px;
 }
 
 .nombre-final {
+    margin: 12px 0;
     font-size: 24px;
     font-weight: bold;
-    margin: 12px 0;
 }
 
 #puntosFinales {
+    margin: 12px 0;
     font-size: 24px;
     font-weight: bold;
-    margin: 12px 0;
 }
 
 .recompensa-final {
+    margin: 15px 0;
     font-size: 22px;
     font-weight: bold;
-    margin: 15px 0;
 }
-
 
 /* ==========================================
    TABLERO DE PROGRESO
+   Compacto y vertical a la izquierda
 ========================================== */
 
 .tablero-progreso {
-    width: 90%;
-    max-width: 700px;
-    padding: 20px;
-    background-color: #ffffff;
+    position: sticky;
+    top: 18px;
+    align-self: start;
+    width: 100%;
+    min-width: 0;
+    padding: 15px;
+    background-color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
+    border-radius: 18px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
     animation: aparecer 0.4s ease;
 }
 
 .tablero-progreso h2 {
-    margin: 0 0 14px;
+    margin: 0 0 8px;
     color: #176b45;
-    text-align: center;
-}
-
-.encabezado-tablero {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 14px;
-}
-
-.nombre-tablero {
-    color: #333333;
-    font-size: 16px;
-    font-weight: bold;
-    overflow-wrap: anywhere;
-}
-
-.puntos-tablero {
-    padding: 8px 12px;
-    border-radius: 10px;
-    background-color: #e8f5e9;
-    color: #176b45;
-    font-size: 17px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.texto-progreso {
-    margin: 12px 0 8px;
-    color: #444444;
-    font-size: 14px;
+    font-size: 20px;
     text-align: left;
 }
 
+.encabezado-tablero {
+    display: block;
+    margin-bottom: 14px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #e4ebe6;
+}
+
+.jugador-tablero {
+    margin: 0;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.jugador-tablero strong {
+    color: #176b45;
+    font-weight: bold;
+}
+
+/* Resumen de puntos y avance */
+
+.resumen-progreso {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+}
+
+.dato-progreso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 9px 10px;
+    border-radius: 9px;
+    background-color: #f3f7f4;
+}
+
+.dato-progreso span {
+    color: #555;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.dato-progreso strong {
+    color: #176b45;
+    font-size: 14px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* Barra de progreso */
+
 .barra-progreso {
     width: 100%;
-    height: 14px;
+    height: 9px;
+    margin: 12px 0 15px;
     overflow: hidden;
     border-radius: 20px;
     background-color: #e5e7eb;
@@ -328,43 +382,110 @@ button:focus-visible {
     transition: width 0.4s ease;
 }
 
+/* Lista vertical de las cuatro misiones */
+
 .lista-progreso-misiones {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    margin-top: 18px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 0;
 }
+
+.estado-mision {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #dfe6e1;
+    border-radius: 11px;
+    background-color: #f8fbf9;
+    text-align: left;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s;
+}
+
+.icono-estado-mision {
+    flex-shrink: 0;
+    font-size: 19px;
+    line-height: 1.3;
+}
+
+.detalle-estado-mision {
+    min-width: 0;
+}
+
+.estado-mision strong {
+    display: block;
+    margin: 0 0 4px;
+    color: #333;
+    font-size: 12px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.estado-mision p {
+    margin: 0;
+    color: #666;
+    font-size: 11px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+/* Estados de las misiones */
+
+.estado-mision.pendiente {
+    border-color: #dfe6e1;
+    background-color: #f8fbf9;
+}
+
+.estado-mision.completada {
+    border-color: #66bb6a;
+    background-color: #e8f5e9;
+}
+
+.estado-mision.completada strong {
+    color: #176b45;
+}
+
+.estado-mision.completada p {
+    color: #205b35;
+}
+
+/* Compatible con el nombre de clase anterior, si se utiliza */
 
 .mision-progreso {
     min-width: 0;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #dfe6e1;
-    border-radius: 12px;
+    border-radius: 11px;
     background-color: #f8fbf9;
     text-align: left;
-    transition: background-color 0.2s, border-color 0.2s;
 }
 
 .mision-progreso strong {
     display: block;
-    margin-bottom: 6px;
-    color: #333333;
-    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 12px;
     line-height: 1.4;
 }
 
-.estado-mision {
+.mision-progreso .estado-mision {
     display: block;
     margin-bottom: 5px;
-    color: #777777;
-    font-size: 12px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 11px;
     font-weight: bold;
 }
 
-.logro-mision {
+.mision-progreso .logro-mision {
     display: block;
-    color: #666666;
-    font-size: 12px;
+    color: #666;
+    font-size: 11px;
     line-height: 1.4;
     overflow-wrap: anywhere;
 }
@@ -382,15 +503,18 @@ button:focus-visible {
     color: #205b35;
 }
 
+/* Botón para volver al inicio */
+
 .boton-volver-inicio {
-    margin-top: 16px;
+    margin-top: 12px;
+    padding: 10px 9px;
     background-color: #555b65;
+    font-size: 13px;
 }
 
 .boton-volver-inicio:hover {
     background-color: #3e434b;
 }
-
 
 /* ==========================================
    VENTANA DE INSTRUCCIONES
@@ -403,8 +527,8 @@ button:focus-visible {
     padding: 0;
     border: none;
     border-radius: 20px;
-    background-color: #ffffff;
-    color: #222222;
+    background-color: #fff;
+    color: #222;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.30);
     overflow-x: hidden;
     overflow-y: auto;
@@ -417,13 +541,13 @@ button:focus-visible {
 .encabezado-instrucciones {
     padding: 22px 24px;
     text-align: center;
-    color: #ffffff;
+    color: #fff;
     background: linear-gradient(135deg, #1976d2, #00a85a);
 }
 
 .ventana-instrucciones .icono-instrucciones {
-    font-size: 44px;
     margin-bottom: 8px;
+    font-size: 44px;
 }
 
 .ventana-instrucciones .encabezado-instrucciones h2 {
@@ -468,6 +592,8 @@ button:focus-visible {
     margin-bottom: 7px;
 }
 
+/* Tabla de puntuación */
+
 .tabla-puntuacion {
     overflow: hidden;
     border: 1px solid #dce7df;
@@ -498,6 +624,8 @@ button:focus-visible {
     font-size: 15px;
 }
 
+/* Reglas de puntuación */
+
 .reglas-errores {
     margin-top: 20px;
     padding: 14px;
@@ -514,6 +642,8 @@ button:focus-visible {
 .reglas-errores ul {
     margin-bottom: 0;
 }
+
+/* Insignias */
 
 .lista-insignias {
     display: flex;
@@ -542,7 +672,7 @@ button:focus-visible {
 
 .insignia p {
     margin: 4px 0 0;
-    color: #555555;
+    color: #555;
     font-size: 14px;
 }
 
@@ -555,6 +685,8 @@ button:focus-visible {
     text-align: center;
     font-weight: bold;
 }
+
+/* Botón inferior de instrucciones */
 
 .boton-cerrar-instrucciones {
     position: sticky;
@@ -572,7 +704,6 @@ button:focus-visible {
     outline: 3px solid #ffbf47;
     outline-offset: 3px;
 }
-
 
 /* ==========================================
    GLOBOS
@@ -619,9 +750,8 @@ button:focus-visible {
     border-top: 10px solid #777;
 }
 
-
 /* ==========================================
-   ANIMACIÓN DE GLOBOS
+   ANIMACIONES
 ========================================== */
 
 @keyframes subirGlobo {
@@ -644,11 +774,6 @@ button:focus-visible {
     }
 }
 
-
-/* ==========================================
-   ANIMACIÓN DE PANTALLAS
-========================================== */
-
 @keyframes aparecer {
     from {
         opacity: 0;
@@ -661,19 +786,25 @@ button:focus-visible {
     }
 }
 
-
 /* ==========================================
-   CELULARES
+   LAPTOPS Y PANTALLAS MEDIANAS
 ========================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
     body {
-        padding: 10px;
-        gap: 12px;
+        padding: 16px;
+    }
+
+    .contenedor-juego {
+        grid-template-columns: 215px minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .tablero-progreso {
+        padding: 12px;
     }
 
     .pantalla {
-        width: 100%;
         padding: 24px;
     }
 
@@ -683,7 +814,133 @@ button:focus-visible {
 
     h2 {
         font-size: 20px;
+    }
+
+    .icono {
+        font-size: 42px;
+    }
+}
+
+/* ==========================================
+   TABLETAS Y CELULARES
+   El tablero se coloca encima del juego
+========================================== */
+
+@media (max-width: 760px) {
+    body {
+        padding: 12px;
+    }
+
+    .contenedor-juego {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    #inicio {
+        order: 0;
+        width: 100%;
+        max-width: 760px;
+        align-self: center;
+    }
+
+    .tablero-progreso {
+        position: static;
+        order: 1;
+        width: 100%;
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    .area-juego {
+        order: 2;
+        width: 100%;
+    }
+
+    .pantalla {
+        width: 100%;
+        max-width: 760px;
+        padding: 24px;
+    }
+
+    .tablero-progreso h2 {
+        font-size: 19px;
+    }
+
+    .encabezado-tablero {
+        margin-bottom: 10px;
+        padding-bottom: 9px;
+    }
+
+    .resumen-progreso {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .dato-progreso {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 9px;
+    }
+
+    .dato-progreso span {
+        font-size: 11px;
+    }
+
+    .dato-progreso strong {
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .lista-progreso-misiones {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .estado-mision {
+        padding: 9px;
+    }
+
+    .estado-mision strong {
+        font-size: 12px;
+    }
+
+    .estado-mision p {
+        font-size: 11px;
+    }
+
+    .boton-volver-inicio {
+        max-width: none;
+    }
+}
+
+/* ==========================================
+   CELULARES
+========================================== */
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .contenedor-juego {
+        gap: 10px;
+    }
+
+    .pantalla {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    h2 {
         margin-bottom: 15px;
+        font-size: 20px;
     }
 
     p {
@@ -695,8 +952,8 @@ button:focus-visible {
     }
 
     button {
-        font-size: 15px;
         padding: 11px 13px;
+        font-size: 15px;
     }
 
     .datos-autor {
@@ -715,52 +972,40 @@ button:focus-visible {
         font-size: 21px;
     }
 
+    #puntosFinales {
+        font-size: 22px;
+    }
+
     .recompensa-final {
         font-size: 19px;
     }
 
-    /* Tablero adaptable */
-
     .tablero-progreso {
-        width: 100%;
-        padding: 16px;
-        border-radius: 16px;
-    }
-
-    .tablero-progreso h2 {
-        font-size: 19px;
-    }
-
-    .encabezado-tablero {
-        align-items: flex-start;
-    }
-
-    .nombre-tablero {
-        font-size: 14px;
-    }
-
-    .puntos-tablero {
-        font-size: 15px;
+        padding: 12px;
     }
 
     .lista-progreso-misiones {
-        gap: 8px;
+        gap: 7px;
     }
 
-    .mision-progreso {
-        padding: 9px;
+    .estado-mision {
+        gap: 7px;
+        padding: 8px;
     }
 
-    .mision-progreso strong {
-        font-size: 12px;
+    .icono-estado-mision {
+        font-size: 17px;
     }
 
-    .estado-mision,
-    .logro-mision {
+    .estado-mision strong {
         font-size: 11px;
     }
 
-    /* Ajustes exclusivos de la ventana */
+    .estado-mision p {
+        font-size: 10px;
+    }
+
+    /* Ventana de instrucciones */
 
     .ventana-instrucciones {
         width: calc(100% - 20px);
@@ -813,33 +1058,55 @@ button:focus-visible {
     }
 }
 
-
 /* ==========================================
    CELULARES MUY ESTRECHOS
 ========================================== */
 
-@media (max-width: 360px) {
-    .lista-progreso-misiones {
-        grid-template-columns: 1fr;
-    }
-
-    .encabezado-tablero {
-        flex-direction: column;
-    }
-
+@media (max-width: 380px) {
     .pantalla {
-        padding: 18px;
+        padding: 16px;
+    }
+
+    .resumen-progreso {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dato-progreso {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .lista-progreso-misiones {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .estado-mision strong {
+        font-size: 12px;
+    }
+
+    .estado-mision p {
+        font-size: 11px;
+    }
+
+    .fila-puntuacion {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
     }
 }
-
 
 /* ==========================================
    LAPTOPS CON POCA ALTURA
 ========================================== */
 
-@media (max-height: 750px) {
+@media (min-width: 761px) and (max-height: 750px) {
     body {
-        padding: 10px;
+        padding: 12px;
+    }
+
+    .contenedor-juego {
+        gap: 14px;
     }
 
     .pantalla {
@@ -847,8 +1114,8 @@ button:focus-visible {
     }
 
     .icono {
-        font-size: 38px;
         margin-bottom: 5px;
+        font-size: 38px;
     }
 
     h1 {
@@ -861,9 +1128,9 @@ button:focus-visible {
     }
 
     p {
+        margin: 7px 0;
         font-size: 15px;
         line-height: 1.4;
-        margin: 7px 0;
     }
 
     button {
@@ -885,8 +1152,24 @@ button:focus-visible {
     .datos-autor p {
         font-size: 10px;
     }
-}
 
+    .tablero-progreso {
+        top: 12px;
+        padding: 11px;
+    }
+
+    .lista-progreso-misiones {
+        gap: 6px;
+    }
+
+    .estado-mision {
+        padding: 7px;
+    }
+
+    .barra-progreso {
+        margin: 9px 0 11px;
+    }
+}
 
 /* ==========================================
    ACCESIBILIDAD: REDUCIR MOVIMIENTO
