@@ -47,7 +47,8 @@ body {
     max-width: 760px;
 }
 
-/* Tablero: columna izquierda */
+/* Tablero: columna izquierda
+   Se conserva su posición y dimensiones */
 
 #tableroProgreso {
     grid-column: 1;
@@ -57,11 +58,15 @@ body {
     min-width: 0;
 }
 
-/* Área de misiones: columna derecha */
+/* Área de misiones:
+   centra el cuadro sin modificar el tablero */
 
 #areaJuego {
     grid-column: 2;
     grid-row: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     width: 100%;
     min-width: 0;
 }
@@ -82,10 +87,14 @@ body {
     animation: aparecer 0.4s ease;
 }
 
-.area-juego > .pantalla {
+/* Ancho controlado para todas las pantallas
+   que se muestran dentro del área del juego */
+
+#areaJuego > .pantalla {
     width: 100%;
-    max-width: none;
-    margin: 0;
+    max-width: 760px;
+    min-width: 0;
+    margin: 0 auto;
 }
 
 .oculto {
@@ -304,7 +313,7 @@ button:focus-visible {
 
 /* ==========================================
    TABLERO DE PROGRESO
-   Compacto y vertical a la izquierda
+   Se mantiene su diseño y posición
 ========================================== */
 
 .tablero-progreso {
@@ -871,14 +880,26 @@ button:focus-visible {
 
     #areaJuego {
         order: 2;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
         width: 100%;
         max-width: 760px;
+        min-width: 0;
     }
 
-    .pantalla,
-    .area-juego > .pantalla {
+    /* Se conserva el ancho máximo del juego */
+
+    .pantalla {
         width: 100%;
-        max-width: none;
+        max-width: 760px;
+        padding: 24px;
+    }
+
+    #areaJuego > .pantalla {
+        width: 100%;
+        max-width: 760px;
+        margin: 0 auto;
         padding: 24px;
     }
 
@@ -948,7 +969,7 @@ button:focus-visible {
     }
 
     .pantalla,
-    .area-juego > .pantalla {
+    #areaJuego > .pantalla {
         padding: 20px;
         border-radius: 20px;
     }
@@ -1083,7 +1104,7 @@ button:focus-visible {
 
 @media (max-width: 380px) {
     .pantalla,
-    .area-juego > .pantalla {
+    #areaJuego > .pantalla {
         padding: 16px;
     }
 
