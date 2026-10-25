@@ -29,6 +29,7 @@ body {
 .contenedor-juego {
     display: grid;
     grid-template-columns: 245px minmax(0, 1fr);
+    grid-template-rows: auto auto;
     align-items: start;
     gap: 20px;
     width: 100%;
@@ -36,20 +37,33 @@ body {
     margin: 0 auto;
 }
 
-/* La pantalla de inicio se mantiene centrada */
+/* Pantalla de inicio centrada */
 
 #inicio {
     grid-column: 1 / -1;
+    grid-row: 1;
     justify-self: center;
     width: 100%;
     max-width: 760px;
 }
 
-/* Área donde aparecen las misiones y los retos */
+/* Tablero: columna izquierda */
 
-.area-juego {
-    min-width: 0;
+#tableroProgreso {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
     width: 100%;
+    min-width: 0;
+}
+
+/* Área de misiones: columna derecha */
+
+#areaJuego {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    min-width: 0;
 }
 
 /* ==========================================
@@ -66,6 +80,12 @@ body {
     text-align: center;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
     animation: aparecer 0.4s ease;
+}
+
+.area-juego > .pantalla {
+    width: 100%;
+    max-width: none;
+    margin: 0;
 }
 
 .oculto {
@@ -195,9 +215,7 @@ button {
     font-weight: 600;
     line-height: 1.3;
     cursor: pointer;
-    transition:
-        transform 0.2s,
-        background-color 0.2s;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 button:hover {
@@ -330,7 +348,7 @@ button:focus-visible {
     font-weight: bold;
 }
 
-/* Resumen de puntos y avance */
+/* Resumen de puntos, misiones y progreso */
 
 .resumen-progreso {
     display: grid;
@@ -382,7 +400,7 @@ button:focus-visible {
     transition: width 0.4s ease;
 }
 
-/* Lista vertical de las cuatro misiones */
+/* Lista vertical de misiones */
 
 .lista-progreso-misiones {
     display: grid;
@@ -401,9 +419,7 @@ button:focus-visible {
     border-radius: 11px;
     background-color: #f8fbf9;
     text-align: left;
-    transition:
-        background-color 0.2s,
-        border-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
 .icono-estado-mision {
@@ -413,6 +429,7 @@ button:focus-visible {
 }
 
 .detalle-estado-mision {
+    flex: 1;
     min-width: 0;
 }
 
@@ -453,7 +470,7 @@ button:focus-visible {
     color: #205b35;
 }
 
-/* Compatible con el nombre de clase anterior, si se utiliza */
+/* Compatibilidad con la clase anterior */
 
 .mision-progreso {
     min-width: 0;
@@ -790,13 +807,13 @@ button:focus-visible {
    LAPTOPS Y PANTALLAS MEDIANAS
 ========================================== */
 
-@media (max-width: 1000px) {
+@media (min-width: 901px) and (max-width: 1100px) {
     body {
         padding: 16px;
     }
 
     .contenedor-juego {
-        grid-template-columns: 215px minmax(0, 1fr);
+        grid-template-columns: 220px minmax(0, 1fr);
         gap: 14px;
     }
 
@@ -826,7 +843,7 @@ button:focus-visible {
    El tablero se coloca encima del juego
 ========================================== */
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
     body {
         padding: 12px;
     }
@@ -834,7 +851,7 @@ button:focus-visible {
     .contenedor-juego {
         display: flex;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         gap: 12px;
     }
 
@@ -842,25 +859,26 @@ button:focus-visible {
         order: 0;
         width: 100%;
         max-width: 760px;
-        align-self: center;
     }
 
-    .tablero-progreso {
-        position: static;
+    #tableroProgreso {
         order: 1;
-        width: 100%;
-        padding: 14px;
-        border-radius: 16px;
-    }
-
-    .area-juego {
-        order: 2;
-        width: 100%;
-    }
-
-    .pantalla {
+        position: static;
         width: 100%;
         max-width: 760px;
+        padding: 14px;
+    }
+
+    #areaJuego {
+        order: 2;
+        width: 100%;
+        max-width: 760px;
+    }
+
+    .pantalla,
+    .area-juego > .pantalla {
+        width: 100%;
+        max-width: none;
         padding: 24px;
     }
 
@@ -929,7 +947,8 @@ button:focus-visible {
         gap: 10px;
     }
 
-    .pantalla {
+    .pantalla,
+    .area-juego > .pantalla {
         padding: 20px;
         border-radius: 20px;
     }
@@ -1063,7 +1082,8 @@ button:focus-visible {
 ========================================== */
 
 @media (max-width: 380px) {
-    .pantalla {
+    .pantalla,
+    .area-juego > .pantalla {
         padding: 16px;
     }
 
@@ -1100,7 +1120,7 @@ button:focus-visible {
    LAPTOPS CON POCA ALTURA
 ========================================== */
 
-@media (min-width: 761px) and (max-height: 750px) {
+@media (min-width: 901px) and (max-height: 750px) {
     body {
         padding: 12px;
     }
